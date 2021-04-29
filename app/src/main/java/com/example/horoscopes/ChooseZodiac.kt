@@ -7,7 +7,7 @@ class ChooseZodiac : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_choose_zodiac)
-        //Ауе блин
+        //Ауе блинasdasd
         var mur = 12
     }
 }
