@@ -8,7 +8,7 @@ class ChooseZodiac : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_choose_zodiac)
         var Mamasha_dasha = "Людмила"
-        var mur = 12
+        var mur = 11
         var mur2 = 124
         var mur4 = 1
 
