@@ -15,6 +15,7 @@ class ChooseZodiac : AppCompatActivity() {
         buttonTwins = findViewById(R.id.buttonTwins) as Button // Хули блять тут ошибка
         buttonTwins.setOnClickListener {
             Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
+            //asd
         }
 
     }

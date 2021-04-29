@@ -147,7 +147,6 @@
         android:layout_width="65dp"
         android:layout_height="71dp"
         android:layout_marginStart="44dp"
-        android:onClick="clickTwins"
         app:layout_constraintBottom_toBottomOf="@+id/buttonTaurus"
         app:layout_constraintStart_toEndOf="@+id/buttonTaurus"
         app:layout_constraintTop_toTopOf="@+id/buttonTaurus"
