@@ -9,5 +9,8 @@ class ChooseZodiac : AppCompatActivity() {
         setContentView(R.layout.activity_choose_zodiac)
 
         var mur = 12
+        var mur2 = 124
+        var mur3 = 14
+        var mur4 = 1
     }
 }
