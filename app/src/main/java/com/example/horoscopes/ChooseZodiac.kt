@@ -21,5 +21,7 @@ class ChooseZodiac : AppCompatActivity() {
 
         var slava_gavrilov = "MARTISHKAAKAKA ludmila"
         if(kashtanchik) println("Каштанчик ON!") else println("Каштанчик OFF!")
+
+        var popa: Int? = null
     }
 }
