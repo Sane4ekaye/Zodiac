@@ -153,27 +153,171 @@
         app:srcCompat="@drawable/twins" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textCancer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/sfprodisplay_regular"
+        android:text="Рак"
+        android:textColor="#FFFFFF"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="@+id/buttonCancer"
+        app:layout_constraintStart_toStartOf="@+id/buttonCancer"
+        app:layout_constraintTop_toBottomOf="@+id/buttonCancer" />
+
+    <TextView
+        android:id="@+id/textScales"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/sfprodisplay_regular"
+        android:text="Весы"
+        android:textColor="#FFFFFF"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="@+id/buttonScales"
+        app:layout_constraintStart_toStartOf="@+id/buttonScales"
+        app:layout_constraintTop_toBottomOf="@+id/buttonScales" />
+
+    <TextView
+        android:id="@+id/textCapricorn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/sfprodisplay_regular"
+        android:text="Козерог"
+        android:textColor="#FFFFFF"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="@+id/buttonCapricorn"
+        app:layout_constraintStart_toStartOf="@+id/buttonCapricorn"
+        app:layout_constraintTop_toBottomOf="@+id/buttonCapricorn" />
+
+    <TextView
+        android:id="@+id/textAquarius"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/sfprodisplay_regular"
+        android:text="Водолей"
+        android:textColor="#FFFFFF"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="@+id/buttonAquarius"
+        app:layout_constraintStart_toStartOf="@+id/buttonAquarius"
+        app:layout_constraintTop_toBottomOf="@+id/buttonAquarius" />
+
+    <TextView
+        android:id="@+id/textFish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/sfprodisplay_regular"
+        android:text="Рыбы"
+        android:textColor="#FFFFFF"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="@+id/buttonFish"
+        app:layout_constraintHorizontal_bias="0.533"
+        app:layout_constraintStart_toStartOf="@+id/buttonFish"
+        app:layout_constraintTop_toBottomOf="@+id/buttonFish" />
+
+    <TextView
+        android:id="@+id/textScorpio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/sfprodisplay_regular"
+        android:text="Скорпион"
+        android:textColor="#FFFFFF"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="@+id/buttonScorpio"
+        app:layout_constraintStart_toStartOf="@+id/buttonScorpio"
+        app:layout_constraintTop_toBottomOf="@+id/buttonScorpio" />
+
+    <TextView
+        android:id="@+id/textSagittarius"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/sfprodisplay_regular"
+        android:text="Стрелец"
+        android:textColor="#FFFFFF"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="@+id/buttonSagittarius"
+        app:layout_constraintStart_toStartOf="@+id/buttonSagittarius"
+        app:layout_constraintTop_toBottomOf="@+id/buttonSagittarius" />
+
+    <TextView
+        android:id="@+id/textLion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/sfprodisplay_regular"
+        android:text="Лев"
+        android:textColor="#FFFFFF"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="@+id/buttonLion"
+        app:layout_constraintStart_toStartOf="@+id/buttonLion"
+        app:layout_constraintTop_toBottomOf="@+id/buttonLion" />
+
+    <TextView
+        android:id="@+id/textVirgin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/sfprodisplay_regular"
+        android:text="Дева"
+        android:textColor="#FFFFFF"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="@+id/buttonVirgin"
+        app:layout_constraintStart_toStartOf="@+id/buttonVirgin"
+        app:layout_constraintTop_toBottomOf="@+id/buttonVirgin" />
+
+    <TextView
+        android:id="@+id/textOven"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/sfprodisplay_regular"
         android:text="Овен"
         android:textColor="#FFFFFF"
         android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="@+id/buttonOven"
+        app:layout_constraintHorizontal_bias="0.514"
         app:layout_constraintStart_toStartOf="@+id/buttonOven"
         app:layout_constraintTop_toBottomOf="@+id/buttonOven" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textTaurus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/sfprodisplay_regular"
         android:text="Телец"
         android:textColor="#FFFFFF"
         android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="@+id/buttonTaurus"
         app:layout_constraintStart_toStartOf="@+id/buttonTaurus"
         app:layout_constraintTop_toBottomOf="@+id/buttonTaurus" />
+
+    <TextView
+        android:id="@+id/textTwins"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/sfprodisplay_regular"
+        android:text="Близнецы"
+        android:textColor="#FFFFFF"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="@+id/buttonTwins"
+        app:layout_constraintStart_toStartOf="@+id/buttonTwins"
+        app:layout_constraintTop_toBottomOf="@+id/buttonTwins" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="33dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
