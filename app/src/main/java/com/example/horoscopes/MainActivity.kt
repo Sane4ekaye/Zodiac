@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
 
         val valera = "Леша" // AHAAHAHAHAHAAHAAHAHAHAAHGAHAHHAAHHAAHап
 
-        var varolant = false
+            //var varolant = false
 //        ⠄⠄⠄⠄⠄⠄⠄⠄⠄⣠⠤⠖⠚⢉⣩⣭⡭⠛⠓⠲⠦⣄⡀⠄⠄⠄⠄⠄
 //        ⠄⠄⠄⠄⠄⠄⢀⡴⠋⠁⠄⠄⠊⠄⠄⠄⠄⠄⠄⠄⠄⠄⠉⠳⢦⡀⠄⠄
 //        ⠄⠄⠄⠄⢀⡴⠃⢀⡴⢳⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠙⣆⠄
