@@ -11,5 +11,7 @@ class ChooseZodiac : AppCompatActivity() {
         var mur = 12
         var mur2 = 124
         var mur4 = 1
+
+        var slava_gavrilov = "MARTISHKAAKAKA ludmila"
     }
 }
