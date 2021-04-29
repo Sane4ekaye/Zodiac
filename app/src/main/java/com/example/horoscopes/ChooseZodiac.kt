@@ -10,7 +10,6 @@ class ChooseZodiac : AppCompatActivity() {
         var Mamasha_dasha = "Людмила"
         var mur = 12
         var mur2 = 124
-        var mur3 = 14
         var mur4 = 1
     }
 }
