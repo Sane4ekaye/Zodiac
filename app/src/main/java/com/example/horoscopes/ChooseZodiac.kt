@@ -8,5 +8,6 @@ class ChooseZodiac : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_choose_zodiac)
 
+        var mur = 12
     }
 }
