@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#232323"
+    tools:context=".ChooseZodiac">
+
+    <ImageView
+        android:id="@+id/buttonFish"
+        android:onClick="ads"
+        android:layout_width="65dp"
+        android:layout_height="71dp"
+        android:layout_marginStart="44dp"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonAquarius"
+        app:layout_constraintStart_toEndOf="@+id/buttonAquarius"
+        app:layout_constraintTop_toTopOf="@+id/buttonAquarius"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/fish" />
+
+    <ImageView
+        android:id="@+id/buttonAquarius"
+        android:layout_width="65dp"
+        android:layout_height="71dp"
+        android:layout_marginTop="56dp"
+        app:layout_constraintEnd_toEndOf="@+id/buttonScorpio"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/buttonScorpio"
+        app:layout_constraintTop_toBottomOf="@+id/buttonScorpio"
+        app:srcCompat="@drawable/aquarius" />
+
+    <ImageView
+        android:id="@+id/buttonCapricorn"
+        android:layout_width="65dp"
+        android:layout_height="71dp"
+        android:layout_marginEnd="44dp"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonAquarius"
+        app:layout_constraintEnd_toStartOf="@+id/buttonAquarius"
+        app:layout_constraintTop_toTopOf="@+id/buttonAquarius"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/capricorn" />
+
+    <ImageView
+        android:id="@+id/buttonScorpio"
+        android:layout_width="65dp"
+        android:layout_height="71dp"
+        android:layout_marginTop="56dp"
+        app:layout_constraintEnd_toEndOf="@+id/buttonLion"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/buttonLion"
+        app:layout_constraintTop_toBottomOf="@+id/buttonLion"
+        app:srcCompat="@drawable/scorpio" />
+
+    <ImageView
+        android:id="@+id/buttonVirgin"
+        android:layout_width="65dp"
+        android:layout_height="71dp"
+        android:layout_marginStart="44dp"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonLion"
+        app:layout_constraintStart_toEndOf="@+id/buttonLion"
+        app:layout_constraintTop_toTopOf="@+id/buttonLion"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/virgin" />
+
+    <ImageView
+        android:id="@+id/buttonSagittarius"
+        android:layout_width="65dp"
+        android:layout_height="71dp"
+        android:layout_marginStart="44dp"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonScorpio"
+        app:layout_constraintStart_toEndOf="@+id/buttonScorpio"
+        app:layout_constraintTop_toTopOf="@+id/buttonScorpio"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/sagittarius" />
+
+    <TextView
+        android:id="@+id/textLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:fontFamily="@font/sfprodisplay_bold"
+        android:text=" Выбери знак"
+        android:textColor="#FFFFFF"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/buttonOven"
+        android:layout_width="65dp"
+        android:layout_height="71dp"
+        android:layout_marginEnd="44dp"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonTaurus"
+        app:layout_constraintEnd_toStartOf="@+id/buttonTaurus"
+        app:layout_constraintTop_toTopOf="@+id/buttonTaurus"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/oven" />
+
+    <ImageView
+        android:id="@+id/buttonCancer"
+        android:layout_width="65dp"
+        android:layout_height="71dp"
+        android:layout_marginEnd="44dp"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonLion"
+        app:layout_constraintEnd_toStartOf="@+id/buttonLion"
+        app:layout_constraintTop_toTopOf="@+id/buttonLion"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/cancer" />
+
+    <ImageView
+        android:id="@+id/buttonScales"
+        android:layout_width="65dp"
+        android:layout_height="71dp"
+        android:layout_marginEnd="44dp"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonScorpio"
+        app:layout_constraintEnd_toStartOf="@+id/buttonScorpio"
+        app:layout_constraintTop_toTopOf="@+id/buttonScorpio"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/scales" />
+
+    <ImageView
+        android:id="@+id/buttonLion"
+        android:layout_width="65dp"
+        android:layout_height="71dp"
+        android:layout_marginTop="56dp"
+        app:layout_constraintEnd_toEndOf="@+id/buttonTaurus"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/buttonTaurus"
+        app:layout_constraintTop_toBottomOf="@+id/buttonTaurus"
+        app:srcCompat="@drawable/lion" />
+
+    <ImageView
+        android:id="@+id/buttonTaurus"
+        android:layout_width="65dp"
+        android:layout_height="71dp"
+        android:layout_marginTop="52dp"
+        app:layout_constraintEnd_toEndOf="@+id/textLogo"
+        app:layout_constraintStart_toStartOf="@+id/textLogo"
+        app:layout_constraintTop_toBottomOf="@+id/textLogo"
+        app:srcCompat="@drawable/taurus" />
+
+    <ImageView
+        android:id="@+id/buttonTwins"
+        android:layout_width="65dp"
+        android:layout_height="71dp"
+        android:layout_marginStart="44dp"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonTaurus"
+        app:layout_constraintStart_toEndOf="@+id/buttonTaurus"
+        app:layout_constraintTop_toTopOf="@+id/buttonTaurus"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/twins" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="Овен"
+        android:textColor="#FFFFFF"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="@+id/buttonOven"
+        app:layout_constraintStart_toStartOf="@+id/buttonOven"
+        app:layout_constraintTop_toBottomOf="@+id/buttonOven" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="Телец"
+        android:textColor="#FFFFFF"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="@+id/buttonTaurus"
+        app:layout_constraintStart_toStartOf="@+id/buttonTaurus"
+        app:layout_constraintTop_toBottomOf="@+id/buttonTaurus" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
