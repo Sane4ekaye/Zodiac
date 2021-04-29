@@ -9,7 +9,6 @@
 
     <ImageView
         android:id="@+id/buttonFish"
-        android:onClick="ads"
         android:layout_width="65dp"
         android:layout_height="71dp"
         android:layout_marginStart="44dp"
