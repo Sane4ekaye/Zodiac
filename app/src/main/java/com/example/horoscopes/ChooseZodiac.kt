@@ -15,7 +15,7 @@ class ChooseZodiac : AppCompatActivity() {
         var Mamasha_dasha = "Людмила"
         var mur = 11
         var mur2 = 124
-        var mur4 = 1
+        var mur4 = 18
 
         var kashtanchik: Boolean = false
 
