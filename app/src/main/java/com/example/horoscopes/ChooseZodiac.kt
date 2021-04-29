@@ -17,9 +17,12 @@ class ChooseZodiac : AppCompatActivity() {
         var mur2 = 124
         var mur4 = 1
 
+        var kashtanchik: Boolean = false
+
         var slava_gavrilov = "MARTISHKAAKAKA ludmila"
         var slava_gavrilov111 = "1 ludmila"
         var slava_gavrilov222 = "afds ludmila1"
         var slava_gav1 = "afds ludmila"
+        if(kashtanchik) println("Каштанчик ON!") else println("Каштанчик OFF!")
     }
 }
