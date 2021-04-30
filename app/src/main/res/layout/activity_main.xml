@@ -21,11 +21,20 @@
             android:layout_height="fill_parent"
             android:orientation="vertical">
 
+            <ImageView
+                android:id="@+id/btnMenu"
+                android:layout_width="33dp"
+                android:layout_height="37dp"
+                android:onClick="openMenu"
+                android:layout_gravity="right"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                app:srcCompat="@drawable/ic_menu_black" />
+
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="40dp"
                 android:layout_marginBottom="18dp"
                 android:fontFamily="@font/sfprodisplay_bold"
                 android:gravity="center"
@@ -41,12 +50,13 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/button"
+                    android:id="@+id/btnToday"
                     style="@android:style/Widget.Button"
                     android:layout_width="103dp"
                     android:layout_height="34dp"
                     android:layout_marginLeft="20dp"
                     android:layout_weight="1"
+                    android:onClick="watchToday"
                     android:background="@drawable/button"
                     android:fontFamily="@font/sfprodisplay_regular"
                     android:gravity="center_horizontal|center_vertical"
@@ -60,7 +70,8 @@
                     android:layout_width="103dp"
                     android:layout_height="34dp"
                     android:layout_weight="1"
-                    android:background="#00FFFFFF"
+                    android:onClick="watchTommorow"
+                    android:background="@color/white_true"
                     android:fontFamily="@font/sfprodisplay_regular"
                     android:text="Завтра"
                     android:textColor="#1572DB"
@@ -72,20 +83,22 @@
                     android:layout_width="103dp"
                     android:layout_height="34dp"
                     android:layout_weight="1"
-                    android:background="#00FFFFFF"
+                    android:onClick="watchWeek"
+                    android:background="@color/white_true"
                     android:fontFamily="@font/sfprodisplay_regular"
                     android:text="Неделя"
                     android:textColor="#1572DB"
                     android:textSize="14sp" />
 
                 <Button
-                    android:id="@+id/button10"
+                    android:id="@+id/btnMonth"
                     style="@android:style/Widget.Button"
                     android:layout_width="103dp"
                     android:layout_height="34dp"
                     android:layout_marginRight="20dp"
                     android:layout_weight="1"
-                    android:background="#00FFFFFF"
+                    android:onClick="watchMonth"
+                    android:background="@color/white_true"
                     android:fontFamily="@font/sfprodisplay_regular"
                     android:text="Месяц"
                     android:textColor="#1572DB"
@@ -94,7 +107,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/tvToday"
+                android:id="@+id/tvMain"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -137,7 +150,7 @@
 
                     android:layout_marginRight="20dp"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/thumb_down" />
+                    app:srcCompat="@drawable/dislike_choose" />
 
             </LinearLayout>
 
@@ -159,48 +172,53 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/button12"
+                    android:id="@+id/btnTodayDown"
                     style="@android:style/Widget.Button"
                     android:layout_width="103dp"
                     android:layout_height="34dp"
                     android:layout_marginLeft="20dp"
                     android:layout_weight="1"
+                    android:onClick="watchToday"
                     android:background="@drawable/button"
                     android:fontFamily="@font/sfprodisplay_regular"
                     android:text="Сегодня"
                     android:textColor="#FFFFFF" />
 
                 <Button
-                    android:id="@+id/button16"
+                    android:id="@+id/btnTommorowDown"
                     style="@android:style/Widget.Button"
                     android:layout_width="103dp"
                     android:layout_height="34dp"
                     android:layout_weight="1"
-                    android:background="#00FFFFFF"
+                    android:background="@color/white_true"
+                    android:onClick="watchTommorow"
                     android:fontFamily="@font/sfprodisplay_regular"
                     android:text="Завтра"
                     android:textColor="#1572DB"
                     android:textSize="14sp" />
 
                 <Button
-                    android:id="@+id/button17"
+                    android:id="@+id/btnWeekDown"
                     style="@android:style/Widget.Button"
                     android:layout_width="103dp"
                     android:layout_height="34dp"
                     android:layout_weight="1"
-                    android:background="#00FFFFFF"
+                    android:onClick="watchWeek"
+                    android:background="@color/white_true"
                     android:fontFamily="@font/sfprodisplay_regular"
                     android:text="Неделя"
                     android:textColor="#1572DB"
                     android:textSize="14sp" />
 
                 <Button
-                    android:id="@+id/button18"
+                    android:id="@+id/btnMonthDown"
                     style="@android:style/Widget.Button"
                     android:layout_width="103dp"
                     android:layout_height="34dp"
+                    android:layout_marginRight="20dp"
                     android:layout_weight="1"
-                    android:background="#00FFFFFF"
+                    android:onClick="watchMonth"
+                    android:background="@color/white_true"
                     android:fontFamily="@font/sfprodisplay_regular"
                     android:text="Месяц"
                     android:textColor="#1572DB"
