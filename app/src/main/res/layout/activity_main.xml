@@ -94,7 +94,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/textMain"
+                android:id="@+id/tvToday"
                 android:layout_width="fill_parent"
                 android:layout_height="335dp"
                 android:layout_marginLeft="20dp"
