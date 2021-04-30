@@ -1,6 +1,7 @@
 package com.example.horoscopes
 
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -10,6 +11,8 @@ import android.widget.Toast
 class ChooseZodiac : AppCompatActivity() {
 
     var btnOven: ImageView? = null
+    val APP_PREFERENCES: String = "horoscope"
+    var Setting: SharedPreferences? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
