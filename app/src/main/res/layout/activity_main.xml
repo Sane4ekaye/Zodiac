@@ -67,7 +67,7 @@
                     android:textSize="14sp" />
 
                 <Button
-                    android:id="@+id/button9"
+                    android:id="@+id/btnWeek"
                     style="@android:style/Widget.Button"
                     android:layout_width="103dp"
                     android:layout_height="34dp"
