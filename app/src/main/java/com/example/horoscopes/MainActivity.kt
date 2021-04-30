@@ -24,7 +24,9 @@ class MainActivity : AppCompatActivity() {
             val textElements = doc.select("div[itemprop=description]")
             val text123 = textElements.select("p").text()
             //val textEnd = doc.getElementById("description")
-            tvToday!!.text = text123
+            this@MainActivity.runOnUiThread(java.lang.Runnable {
+                tvToday.text = text123
+            })
         }
     }
 }
