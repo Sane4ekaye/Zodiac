@@ -55,7 +55,7 @@
                     android:textSize="14sp" />
 
                 <Button
-                    android:id="@+id/button2"
+                    android:id="@+id/btnTommorow"
                     style="@android:style/Widget.Button"
                     android:layout_width="103dp"
                     android:layout_height="34dp"
@@ -96,11 +96,10 @@
             <TextView
                 android:id="@+id/tvToday"
                 android:layout_width="fill_parent"
-                android:layout_height="335dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:fontFamily="@font/sfprodisplay_regular"
-                android:text="error text"
                 android:textColor="#000427"
                 android:textSize="14sp" />
 
@@ -129,12 +128,13 @@
                     android:layout_width="1dp"
                     android:layout_height="30dp"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/thumb_up" />
+                    app:srcCompat="@drawable/like_choose" />
 
                 <ImageView
                     android:id="@+id/imageView6"
                     android:layout_width="1dp"
                     android:layout_height="30dp"
+
                     android:layout_marginRight="20dp"
                     android:layout_weight="1"
                     app:srcCompat="@drawable/thumb_down" />
