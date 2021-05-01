@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/zodiac"
+        android:title="Знак зодиака"
+        android:icon="@drawable/ico_zodiac"/>
+    <item
+        android:id="@+id/feedback"
+        android:title="Обратная связь"
+        android:icon="@drawable/ico_feedback"/>
+    <item
+        android:id="@+id/like"
+        android:title="Оценить приложение"
+        android:icon="@drawable/ico_like"/>
+</menu>

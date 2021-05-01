@@ -1,13 +1,21 @@
 package com.example.horoscopes
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
+import android.view.ViewParent
+import android.widget.*
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.layout_navigation_header.*
 import org.jsoup.Jsoup
 import kotlin.concurrent.thread
 
@@ -21,6 +29,8 @@ class MainActivity : AppCompatActivity() {
     private var forecastTodayWeek = ""
     private var forecastTodayMonth = ""
 
+    var horoscope: Array<String> = arrayOf("Овен", "Телец", "Близнецы", "Рак", "Лев", "Дева", "Весы", "Скорпион", "Стрелец", "Козерог", "Водолей", "Рыбы")
+
     var Setting: SharedPreferences? = null
     val APP_PREFERENCES: String = "horoscope"
     val APP_PREFERENCES_SELECTED_HOROSCOPE: String = "selectedHoroscope"
@@ -28,32 +38,21 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        val drawerLayout: DrawerLayout = findViewById(R.id.drawerLayout)
+        var navigationView: NavigationView = findViewById(R.id.navigationView)
+        navigationView.itemIconTintList = null
 
         Setting = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
 
         val zodiac = Setting!!.getString(APP_PREFERENCES_SELECTED_HOROSCOPE, "").toString()
 
-//        if(Setting!!.contains(APP_PREFERENCES_SELECTED_HOROSCOPE)){
-//            if(Setting!!.getString(APP_PREFERENCES_SELECTED_HOROSCOPE, "").equals("aries")) getText(Setting!!.getString(APP_PREFERENCES_SELECTED_HOROSCOPE, "").toString())
-//            else if(Setting!!.getString(APP_PREFERENCES_SELECTED_HOROSCOPE, "").equals("taurus")) getText(Setting!!.getString(APP_PREFERENCES_SELECTED_HOROSCOPE, "").toString())
-//            else if(Setting!!.getString(APP_PREFERENCES_SELECTED_HOROSCOPE, "").equals("gemini")) getText(Setting!!.getString(APP_PREFERENCES_SELECTED_HOROSCOPE, "").toString())
-//            else if(Setting!!.getString(APP_PREFERENCES_SELECTED_HOROSCOPE, "").equals("cancer")) getText(Setting!!.getString(APP_PREFERENCES_SELECTED_HOROSCOPE, "").toString())
-//            else if(Setting!!.getString(APP_PREFERENCES_SELECTED_HOROSCOPE, "").equals("leo")) getText(Setting!!.getString(APP_PREFERENCES_SELECTED_HOROSCOPE, "").toString())
-//            else if(Setting!!.getString(APP_PREFERENCES_SELECTED_HOROSCOPE, "").equals("virgo")) getText(Setting!!.getString(APP_PREFERENCES_SELECTED_HOROSCOPE, "").toString())
-//            else if(Setting!!.getString(APP_PREFERENCES_SELECTED_HOROSCOPE, "").equals("libra")) getText(Setting!!.getString(APP_PREFERENCES_SELECTED_HOROSCOPE, "").toString())
-//            else if(Setting!!.getString(APP_PREFERENCES_SELECTED_HOROSCOPE, "").equals("scorpio")) getText(Setting!!.getString(APP_PREFERENCES_SELECTED_HOROSCOPE, "").toString())
-//            else if(Setting!!.getString(APP_PREFERENCES_SELECTED_HOROSCOPE, "").equals("sagittarius")) getText(Setting!!.getString(APP_PREFERENCES_SELECTED_HOROSCOPE, "").toString())
-//            else if(Setting!!.getString(APP_PREFERENCES_SELECTED_HOROSCOPE, "").equals("capricorn")) getText(Setting!!.getString(APP_PREFERENCES_SELECTED_HOROSCOPE, "").toString())
-//            else if(Setting!!.getString(APP_PREFERENCES_SELECTED_HOROSCOPE, "").equals("pisces")) getText(Setting!!.getString(APP_PREFERENCES_SELECTED_HOROSCOPE, "").toString())
-//            else tvMain.text = "error text!"
-//        }
-
-
         getStartText(zodiac, URLHoroscope)
 
         getForecastToday(zodiac, URLHoroscope)
         getForecastTomorrow(zodiac, "tomorrow", URLHoroscope)
+        //spinner.adapter = ArrayAdapter<String>(this@MainActivity, R.layout.layout_color_spinner, R.array.horoscope)
+
     }
 
     private fun getText(zodiac: String) {
@@ -67,7 +66,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // это затычка
+    // это заточка
     private fun getStartText(zodiac: String, url: String) {
         thread {
             val doc = Jsoup.connect("$url?znak=$zodiac").get()
@@ -121,7 +120,28 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun openMenu(view: View) {
-        //TODO тут короче сделать шобы данные стирались и мы заново выбирали знак зодиака
+        drawerLayout.openDrawer(GravityCompat.START)
+        var arrayAdapter: ArrayAdapter<Any?> = ArrayAdapter<Any?>(this@MainActivity, R.layout.layout_color_spinner, horoscope)
+        arrayAdapter.setDropDownViewResource(R.layout.layout_color_spinner2)
+        spinnernegra.adapter = arrayAdapter
+
+        spinnernegra?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                var selItem = spinnernegra.getItemAtPosition(position).toString()
+                if(selItem.equals("Овен"))
+                    // добавь сюда
+                    getStartText("aries", URLHoroscope)
+                    getForecastToday("aries", URLHoroscope)
+                    getForecastTomorrow("aries", "tomorrow", URLHoroscope)
+                if(selItem.equals("Телец"))
+                    getStartText("taurus", URLHoroscope)
+                    getForecastToday("taurus", URLHoroscope)
+                    getForecastTomorrow("taurus", "tomorrow", URLHoroscope)
+            }
+        }
     }
 
     private fun switchColorsForBtnToday() {
@@ -231,4 +251,11 @@ class MainActivity : AppCompatActivity() {
         btnWeekDown.setTextColor(getColor(R.color.blueApp))
     }
 
+    fun feedback(view: View) {
+        val intent = Intent(this@MainActivity, FeedBack::class.java)
+        startActivity(intent)
+    }
+
 }
+
+
