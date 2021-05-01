@@ -7,6 +7,7 @@ import android.content.SharedPreferences
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Html
 import android.view.Gravity
 import android.view.View
 import android.view.ViewParent
@@ -22,18 +23,21 @@ import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
 
-    private val URLHoroscope: String = "https://1001goroskop.ru"
+    private val URLHoroscopeTodayTomorrow: String = "https://1001goroskop.ru"
+    private val URLHoroscopeWeekMonth: String = "https://horoscopes.rambler.ru"
 
     private var forecastToday = ""
     private var forecastTomorrow = ""
-    private var forecastTodayWeek = ""
-    private var forecastTodayMonth = ""
-
-    var horoscope: Array<String> = arrayOf("Овен", "Телец", "Близнецы", "Рак", "Лев", "Дева", "Весы", "Скорпион", "Стрелец", "Козерог", "Водолей", "Рыбы")
+    private var forecastWeek = ""
+    private var forecastMonth = ""
 
     var Setting: SharedPreferences? = null
     val APP_PREFERENCES: String = "horoscope"
     val APP_PREFERENCES_SELECTED_HOROSCOPE: String = "selectedHoroscope"
+
+    var zodiac = ""
+
+    var horoscope: Array<String> = arrayOf("Овен", "Телец", "Близнецы", "Рак", "Лев", "Дева", "Весы", "Скорпион", "Стрелец", "Козерог", "Водолей", "Рыбы")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,38 +46,31 @@ class MainActivity : AppCompatActivity() {
         val drawerLayout: DrawerLayout = findViewById(R.id.drawerLayout)
         var navigationView: NavigationView = findViewById(R.id.navigationView)
         navigationView.itemIconTintList = null
+        //spinner.adapter = ArrayAdapter<String>(this@MainActivity, R.layout.layout_color_spinner, R.array.horoscope)
 
         Setting = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
 
-        val zodiac = Setting!!.getString(APP_PREFERENCES_SELECTED_HOROSCOPE, "").toString()
+        zodiac = Setting!!.getString(APP_PREFERENCES_SELECTED_HOROSCOPE, "").toString()
+        
+        getStartText(zodiac, URLHoroscopeTodayTomorrow)
 
-        getStartText(zodiac, URLHoroscope)
+        getForecastToday(zodiac, URLHoroscopeTodayTomorrow)
+        getForecastTomorrow(zodiac, URLHoroscopeTodayTomorrow)
+        getForecastWeek(zodiac, URLHoroscopeWeekMonth)
 
-        getForecastToday(zodiac, URLHoroscope)
-        getForecastTomorrow(zodiac, "tomorrow", URLHoroscope)
-        //spinner.adapter = ArrayAdapter<String>(this@MainActivity, R.layout.layout_color_spinner, R.array.horoscope)
+        getForecastMonth(zodiac, URLHoroscopeWeekMonth)
+
 
     }
 
-    private fun getText(zodiac: String) {
-        thread {
-            val doc = Jsoup.connect("$URLHoroscope?znak=$zodiac").get()
-            val textElements = doc.select("div[itemprop=description]")
-            val text123 = textElements.select("p").text()
-            this@MainActivity.runOnUiThread(java.lang.Runnable {
-                tvMain.text = text123
-            })
-        }
-    }
-
-    // это заточка
+    // это затычка
     private fun getStartText(zodiac: String, url: String) {
         thread {
             val doc = Jsoup.connect("$url?znak=$zodiac").get()
             val textElements = doc.select("div[itemprop=description]")
-            val text123 = textElements.select("p").text()
+            val resultText = textElements.select("p").text()
             this@MainActivity.runOnUiThread(java.lang.Runnable {
-                tvMain.text = text123
+                tvMain.text = resultText
             })
         }
     }
@@ -82,20 +79,125 @@ class MainActivity : AppCompatActivity() {
         thread {
             val doc = Jsoup.connect("$url?znak=$zodiac").get()
             val textElements = doc.select("div[itemprop=description]")
-            val text123 = textElements.select("p").text()
+            val resultText = textElements.select("p").text()
             this@MainActivity.runOnUiThread(java.lang.Runnable {
-                forecastToday = text123
+                forecastToday = resultText
             })
         }
     }
 
-    private fun getForecastTomorrow(zodiac: String, date: String, url: String) {
+    private fun getForecastTomorrow(zodiac: String, url: String) {
         thread {
-            val doc = Jsoup.connect("$url?znak=$zodiac&kn=$date").get()
+            val doc = Jsoup.connect("$url?znak=$zodiac&kn=tomorrow").get()
             val textElements = doc.select("div[itemprop=description]")
-            val text123 = textElements.select("p").text()
+            val resultText = textElements.select("p").text()
             this@MainActivity.runOnUiThread(java.lang.Runnable {
-                forecastTomorrow = text123
+                forecastTomorrow = resultText
+            })
+        }
+    }
+
+    private fun getForecastWeek(zodiac: String, url: String) {
+        thread {
+            val doc = Jsoup.connect("$url/$zodiac/weekly/").get()
+            val textElements = doc.select("div[itemprop=articleBody]")
+            var length = textElements.select("p").size
+            var resultText = StringBuilder()
+            for (i in 1..length) {
+                resultText.append(textElements.select("p")[i-1].text() + "\n\n")
+                if (i == length) resultText.append(textElements.select("p")[i-1].text())
+            }
+            this@MainActivity.runOnUiThread(java.lang.Runnable {
+                forecastWeek = resultText.toString()
+            })
+        }
+    }
+
+    private fun getForecastMonth(zodiac: String, url: String) {
+        thread {
+        // TODO если ты захочешь убиться нахуй, то вот затычка хуйня и залупа но решение
+        //  var negri = textElements.html()
+
+            val doc = Jsoup.connect("$url/$zodiac/monthly/").get()
+            val textElements = doc.select("div[itemprop=articleBody]")
+
+            var divCounter = 0
+            var negri = textElements.select("div")[divCounter + 1].nextElementSibling().text()
+
+            var lengthP = textElements.select("p").size
+            var lengthH2 = textElements.select("h2").size
+            var length = lengthP + lengthH2 + 1
+            var resultText = StringBuilder()
+            var tag = "p"
+            var pCounter = 0
+            var h2Counter = 0
+            var text = ""
+            for (i in 1..length) {
+                if (i == 1) {
+                    resultText.append(textElements.select("p")[0].text() + "<br><br>")
+                    text = textElements.select("p")[0].nextElementSibling().text()
+                    tag = textElements.select("p")[0].nextElementSibling().nodeName()
+                }
+                if (tag.equals("p")) {
+                    resultText.append(text + "<br><br>")
+                } else if (tag.equals("h2")) {
+                    var textMonth = "<big><b>$text</b></big>"
+                    resultText.append(textMonth + "<br>")
+                } else if (tag.equals("div")) {
+                    text = textElements.select("div")[divCounter + 1].nextElementSibling().text()
+                    tag = textElements.select("div")[divCounter + 1].nextElementSibling().nodeName()
+                    divCounter += 5
+                    continue
+                }
+                if (i != length) {
+                    var tempText = text
+                    text = doc.selectFirst("$tag:containsOwn($text)").nextElementSibling().text()
+                    tag = doc.selectFirst("$tag:containsOwn($tempText)").nextElementSibling().tagName()
+                }
+
+                // -----------------------------
+//                if (myTag.equals("p")) {
+//                    resultText.append(textElements.select(myTag)[pCounter].text() + "\n\n")
+//                    pCounter++
+//                    myTag = textElements.select(myTag)[pCounter].nextElementSibling().nodeName()
+//                } else if (myTag.equals("h2")) {
+//                    var textTemp = textElements.select(myTag)[h2Counter].text()
+//                    var textMonth = "<big>$textTemp</big>"
+//                    resultText.append(textMonth + "\n")
+//                    h2Counter++
+//                    myTag = textElements.select(myTag)[h2Counter].nextElementSibling().nodeName()
+//                }
+              }
+//            var lengthP = textElements.select("p").size
+//            var lengthH2 = textElements.select("h2").size
+//            var length = lengthP + lengthH2
+//            var resultText = StringBuilder()
+//            var myTag = ""
+//            for (i in 1..length) {
+//                if (textElements.select("p")[0].nextElementSibling().nodeName().equals("p")) {
+//                    resultText.append(textElements.select("p")[i - 1].text() + "\n\n")
+//                    myTag = "p"
+//                } else if (textElements.select("p")[i - 1].nextElementSibling().nodeName().equals("h2")) {
+//                    var textTemp = textElements.select("p")[i - 1].text()
+//                    var textMonth = "<big>$textTemp</big>"
+//                    resultText.append(textMonth + "\n")
+//                    myTag = "h2"
+//                }
+//
+//                if (myTag.equals("p")) {
+//                    resultText.append(textElements.select("p")[i - 1].text() + "\n\n")
+//                }
+//
+//                if (i == length) resultText.append(textElements.select("p")[i-1].text())
+//            }
+//            var length = textElements.select("p").size
+//            var resultText = StringBuilder()
+//            for (i in 1..length) {
+//                resultText.append(textElements.select("p")[i-1].text() + "\n\n")
+//                if (i == length) resultText.append(textElements.select("p")[i-1].text())
+//            }
+            this@MainActivity.runOnUiThread(java.lang.Runnable {
+                forecastMonth = resultText.toString()
             })
         }
     }
@@ -112,11 +214,12 @@ class MainActivity : AppCompatActivity() {
 
     fun watchWeek(view: View) {
         switchColorsForBtnWeek()
-//        getForecast("aries", "week", "https://1001goroskop.ru")
+        tvMain.text = forecastWeek
     }
 
     fun watchMonth(view: View) {
         switchColorsForBtnMonth()
+        tvMain.text = Html.fromHtml(forecastMonth)
     }
 
     fun openMenu(view: View) {
@@ -131,15 +234,15 @@ class MainActivity : AppCompatActivity() {
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 var selItem = spinnernegra.getItemAtPosition(position).toString()
-                if(selItem.equals("Овен"))
-                    // добавь сюда
-                    getStartText("aries", URLHoroscope)
-                    getForecastToday("aries", URLHoroscope)
-                    getForecastTomorrow("aries", "tomorrow", URLHoroscope)
-                if(selItem.equals("Телец"))
-                    getStartText("taurus", URLHoroscope)
-                    getForecastToday("taurus", URLHoroscope)
-                    getForecastTomorrow("taurus", "tomorrow", URLHoroscope)
+                if(selItem.equals("Дева"))
+                  //zodiac = "aries"
+//                getStartText("aries", URLHoroscope)
+                  getForecastToday("virgo", URLHoroscopeTodayTomorrow)
+//                getForecastTomorrow("aries", "tomorrow", URLHoroscope)
+//                if(selItem.equals("Телец"))
+//                    getStartText("taurus", URLHoroscope)
+//                getForecastToday("taurus", URLHoroscope)
+//                getForecastTomorrow("taurus", "tomorrow", URLHoroscope)
             }
         }
     }
@@ -257,5 +360,3 @@ class MainActivity : AppCompatActivity() {
     }
 
 }
-
-
