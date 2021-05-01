@@ -50,9 +50,9 @@ class MainActivity : AppCompatActivity() {
 //        }
 
 
-        getStartText(zodiac, "today", URLHoroscope)
+        getStartText(zodiac, URLHoroscope)
 
-        getForecastToday(zodiac, "today", URLHoroscope)
+        getForecastToday(zodiac, URLHoroscope)
         getForecastTomorrow(zodiac, "tomorrow", URLHoroscope)
     }
 
@@ -68,9 +68,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     // это затычка
-    private fun getStartText(zodiac: String, date: String, url: String) {
+    private fun getStartText(zodiac: String, url: String) {
         thread {
-            val doc = Jsoup.connect("$url?kn=$zodiac&kn=$date").get()
+            val doc = Jsoup.connect("$url?znak=$zodiac").get()
             val textElements = doc.select("div[itemprop=description]")
             val text123 = textElements.select("p").text()
             this@MainActivity.runOnUiThread(java.lang.Runnable {
@@ -79,9 +79,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun getForecastToday(zodiac: String, date: String, url: String) {
+    private fun getForecastToday(zodiac: String, url: String) {
         thread {
-            val doc = Jsoup.connect("$url?kn=$zodiac&kn=$date").get()
+            val doc = Jsoup.connect("$url?znak=$zodiac").get()
             val textElements = doc.select("div[itemprop=description]")
             val text123 = textElements.select("p").text()
             this@MainActivity.runOnUiThread(java.lang.Runnable {
@@ -92,7 +92,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun getForecastTomorrow(zodiac: String, date: String, url: String) {
         thread {
-            val doc = Jsoup.connect("$url?kn=$zodiac&kn=$date").get()
+            val doc = Jsoup.connect("$url?znak=$zodiac&kn=$date").get()
             val textElements = doc.select("div[itemprop=description]")
             val text123 = textElements.select("p").text()
             this@MainActivity.runOnUiThread(java.lang.Runnable {
