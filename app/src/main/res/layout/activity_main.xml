@@ -10,6 +10,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/scrollView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -20,16 +21,17 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
+            android:id="@+id/layout"
             android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/btnMenu"
-                android:layout_width="33dp"
-                android:layout_height="37dp"
-                android:onClick="openMenu"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
                 android:layout_gravity="right"
                 android:layout_marginTop="16dp"
                 android:layout_marginRight="16dp"
+                android:onClick="openMenu"
                 app:srcCompat="@drawable/ic_menu_black" />
 
             <TextView
@@ -111,9 +113,9 @@
                 android:id="@+id/tvMain"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:lineSpacingExtra="2dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
+                android:lineSpacingExtra="2dp"
                 android:fontFamily="@font/sfprodisplay_regular"
                 android:textColor="#000427"
                 android:textSize="14sp" />
@@ -160,7 +162,7 @@
                 android:id="@+id/textView7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="14dp"
                 android:fontFamily="@font/sfprodisplay_bold"
                 android:gravity="center"
                 android:text="Вам также может быть интересно"

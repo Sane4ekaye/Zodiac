@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity() {
     var Setting: SharedPreferences? = null
     val APP_PREFERENCES: String = "horoscope"
     val APP_PREFERENCES_SELECTED_HOROSCOPE: String = "selectedHoroscope"
+
     var zodiac = ""
 
     var horoscope: Array<String> = arrayOf("Овен", "Телец", "Близнецы", "Рак", "Лев", "Дева", "Весы", "Скорпион", "Стрелец", "Козерог", "Водолей", "Рыбы")
@@ -49,10 +50,12 @@ class MainActivity : AppCompatActivity() {
         val drawerLayout: DrawerLayout = findViewById(R.id.drawerLayout)
         var navigationView: NavigationView = findViewById(R.id.navigationView)
         navigationView.itemIconTintList = null
+        //spinner.adapter = ArrayAdapter<String>(this@MainActivity, R.layout.layout_color_spinner, R.array.horoscope)
 
         Setting = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
 
         zodiac = Setting!!.getString(APP_PREFERENCES_SELECTED_HOROSCOPE, "").toString()
+
         mToast = Toast(applicationContext)
         getStartText(zodiac, URLHoroscopeTodayTomorrow)
 
@@ -118,7 +121,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun getForecastMonth(zodiac: String, url: String) {
         thread {
-        // TODO если ты захочешь убиться нахуй, то вот затычка хуйня и залупа но решение
+        // TODO если ты захочешь убиться нахуй, то вот затoчка хуйня и залупа но решение
         //  var negri = textElements.html()
 
             val doc = Jsoup.connect("$url/$zodiac/monthly/").get()
@@ -132,8 +135,6 @@ class MainActivity : AppCompatActivity() {
             var length = lengthP + lengthH2 + 1
             var resultText = StringBuilder()
             var tag = "p"
-            var pCounter = 0
-            var h2Counter = 0
             var text = ""
             for (i in 1..length) {
                 if (i == 1) {
@@ -141,10 +142,12 @@ class MainActivity : AppCompatActivity() {
                     text = textElements.select("p")[0].nextElementSibling().text()
                     tag = textElements.select("p")[0].nextElementSibling().nodeName()
                 }
-                if (tag.equals("p")) {
+                if (tag.equals("p") && i == length) {
+                    resultText.append(text + "")
+                } else if (tag.equals("p")) {
                     resultText.append(text + "<br><br>")
                 } else if (tag.equals("h2")) {
-                    var textMonth = "<big><b>$text</b></big>"
+                    var textMonth = "<big><sup><b>$text</b></sup></big>"
                     resultText.append(textMonth + "<br>")
                 } else if (tag.equals("div")) {
                     text = textElements.select("div")[divCounter + 1].nextElementSibling().text()
@@ -157,48 +160,8 @@ class MainActivity : AppCompatActivity() {
                     text = doc.selectFirst("$tag:containsOwn($text)").nextElementSibling().text()
                     tag = doc.selectFirst("$tag:containsOwn($tempText)").nextElementSibling().tagName()
                 }
-
-                // -----------------------------
-//                if (myTag.equals("p")) {
-//                    resultText.append(textElements.select(myTag)[pCounter].text() + "\n\n")
-//                    pCounter++
-//                    myTag = textElements.select(myTag)[pCounter].nextElementSibling().nodeName()
-//                } else if (myTag.equals("h2")) {
-//                    var textTemp = textElements.select(myTag)[h2Counter].text()
-//                    var textMonth = "<big>$textTemp</big>"
-//                    resultText.append(textMonth + "\n")
-//                    h2Counter++
-//                    myTag = textElements.select(myTag)[h2Counter].nextElementSibling().nodeName()
-//                }
               }
-//            var lengthP = textElements.select("p").size
-//            var lengthH2 = textElements.select("h2").size
-//            var length = lengthP + lengthH2
-//            var resultText = StringBuilder()
-//            var myTag = ""
-//            for (i in 1..length) {
-//                if (textElements.select("p")[0].nextElementSibling().nodeName().equals("p")) {
-//                    resultText.append(textElements.select("p")[i - 1].text() + "\n\n")
-//                    myTag = "p"
-//                } else if (textElements.select("p")[i - 1].nextElementSibling().nodeName().equals("h2")) {
-//                    var textTemp = textElements.select("p")[i - 1].text()
-//                    var textMonth = "<big>$textTemp</big>"
-//                    resultText.append(textMonth + "\n")
-//                    myTag = "h2"
-//                }
-//
-//                if (myTag.equals("p")) {
-//                    resultText.append(textElements.select("p")[i - 1].text() + "\n\n")
-//                }
-//
-//                if (i == length) resultText.append(textElements.select("p")[i-1].text())
-//            }
-//            var length = textElements.select("p").size
-//            var resultText = StringBuilder()
-//            for (i in 1..length) {
-//                resultText.append(textElements.select("p")[i-1].text() + "\n\n")
-//                if (i == length) resultText.append(textElements.select("p")[i-1].text())
-//            }
+
             this@MainActivity.runOnUiThread(java.lang.Runnable {
                 forecastMonth = resultText.toString()
             })
@@ -233,7 +196,9 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 var selItem = spinner.getItemAtPosition(position).toString()
 
-                if(selItem.equals("Овен")) {
+                if(selItem.equals("Овен") && zodiac != "aries") {
+                    getStartText("aries", URLHoroscopeTodayTomorrow)
+                    switchColorsForBtnToday()
                     getForecastToday("aries", URLHoroscopeTodayTomorrow)
                     getForecastTomorrow("aries", URLHoroscopeTodayTomorrow)
                     getForecastWeek("aries", URLHoroscopeWeekMonth)
@@ -242,7 +207,9 @@ class MainActivity : AppCompatActivity() {
                     editor.putString(APP_PREFERENCES_SELECTED_HOROSCOPE, "aries")
                     editor.apply()
                 }
-                if(selItem.equals("Телец")){
+                if(selItem.equals("Телец") && zodiac != "taurus"){
+                    getStartText("taurus", URLHoroscopeTodayTomorrow)
+                    switchColorsForBtnToday()
                     getForecastToday("taurus", URLHoroscopeTodayTomorrow)
                     getForecastTomorrow("taurus", URLHoroscopeTodayTomorrow)
                     getForecastWeek("taurus", URLHoroscopeWeekMonth)
@@ -251,7 +218,9 @@ class MainActivity : AppCompatActivity() {
                     editor.putString(APP_PREFERENCES_SELECTED_HOROSCOPE, "taurus")
                     editor.apply()
                 }
-                if(selItem.equals("Близнецы")){
+                if(selItem.equals("Близнецы") && zodiac != "gemini"){
+                    getStartText("gemini", URLHoroscopeTodayTomorrow)
+                    switchColorsForBtnToday()
                     getForecastToday("gemini", URLHoroscopeTodayTomorrow)
                     getForecastTomorrow("gemini", URLHoroscopeTodayTomorrow)
                     getForecastWeek("gemini", URLHoroscopeWeekMonth)
@@ -260,7 +229,9 @@ class MainActivity : AppCompatActivity() {
                     editor.putString(APP_PREFERENCES_SELECTED_HOROSCOPE, "gemini")
                     editor.apply()
                 }
-                if(selItem.equals("Рак")){
+                if(selItem.equals("Рак") && zodiac != "cancer"){
+                    getStartText("cancer", URLHoroscopeTodayTomorrow)
+                    switchColorsForBtnToday()
                     getForecastToday("cancer", URLHoroscopeTodayTomorrow)
                     getForecastTomorrow("cancer", URLHoroscopeTodayTomorrow)
                     getForecastWeek("cancer", URLHoroscopeWeekMonth)
@@ -269,7 +240,9 @@ class MainActivity : AppCompatActivity() {
                     editor.putString(APP_PREFERENCES_SELECTED_HOROSCOPE, "cancer")
                     editor.apply()
                 }
-                if(selItem.equals("Лев")){
+                if(selItem.equals("Лев") && zodiac != "leo"){
+                    getStartText("leo", URLHoroscopeTodayTomorrow)
+                    switchColorsForBtnToday()
                     getForecastToday("leo", URLHoroscopeTodayTomorrow)
                     getForecastTomorrow("leo", URLHoroscopeTodayTomorrow)
                     getForecastWeek("leo", URLHoroscopeWeekMonth)
@@ -278,7 +251,9 @@ class MainActivity : AppCompatActivity() {
                     editor.putString(APP_PREFERENCES_SELECTED_HOROSCOPE, "leo")
                     editor.apply()
                 }
-                if(selItem.equals("Дева")){
+                if(selItem.equals("Дева") && zodiac != "virgo"){
+                    getStartText("virgo", URLHoroscopeTodayTomorrow)
+                    switchColorsForBtnToday()
                     getForecastToday("virgo", URLHoroscopeTodayTomorrow)
                     getForecastTomorrow("virgo", URLHoroscopeTodayTomorrow)
                     getForecastWeek("virgo", URLHoroscopeWeekMonth)
@@ -287,7 +262,9 @@ class MainActivity : AppCompatActivity() {
                     editor.putString(APP_PREFERENCES_SELECTED_HOROSCOPE, "virgo")
                     editor.apply()
                 }
-                if(selItem.equals("Весы")){
+                if(selItem.equals("Весы") && zodiac != "libra"){
+                    getStartText("libra", URLHoroscopeTodayTomorrow)
+                    switchColorsForBtnToday()
                     getForecastToday("libra", URLHoroscopeTodayTomorrow)
                     getForecastTomorrow("libra", URLHoroscopeTodayTomorrow)
                     getForecastWeek("libra", URLHoroscopeWeekMonth)
@@ -296,7 +273,9 @@ class MainActivity : AppCompatActivity() {
                     editor.putString(APP_PREFERENCES_SELECTED_HOROSCOPE, "libra")
                     editor.apply()
                 }
-                if(selItem.equals("Скорпион")){
+                if(selItem.equals("Скорпион") && zodiac != "scorpio"){
+                    getStartText("scorpio", URLHoroscopeTodayTomorrow)
+                    switchColorsForBtnToday()
                     getForecastToday("scorpio", URLHoroscopeTodayTomorrow)
                     getForecastTomorrow("scorpio", URLHoroscopeTodayTomorrow)
                     getForecastWeek("scorpio", URLHoroscopeWeekMonth)
@@ -305,7 +284,9 @@ class MainActivity : AppCompatActivity() {
                     editor.putString(APP_PREFERENCES_SELECTED_HOROSCOPE, "scorpio")
                     editor.apply()
                 }
-                if(selItem.equals("Стрелец")){
+                if(selItem.equals("Стрелец") && zodiac != "sagittarius"){
+                    getStartText("sagittarius", URLHoroscopeTodayTomorrow)
+                    switchColorsForBtnToday()
                     getForecastToday("sagittarius", URLHoroscopeTodayTomorrow)
                     getForecastTomorrow("sagittarius", URLHoroscopeTodayTomorrow)
                     getForecastWeek("sagittarius", URLHoroscopeWeekMonth)
@@ -314,7 +295,9 @@ class MainActivity : AppCompatActivity() {
                     editor.putString(APP_PREFERENCES_SELECTED_HOROSCOPE, "sagittarius")
                     editor.apply()
                 }
-                if(selItem.equals("Козерог")){
+                if(selItem.equals("Козерог") && zodiac != "capricorn"){
+                    getStartText("capricorn", URLHoroscopeTodayTomorrow)
+                    switchColorsForBtnToday()
                     getForecastToday("capricorn", URLHoroscopeTodayTomorrow)
                     getForecastTomorrow("capricorn", URLHoroscopeTodayTomorrow)
                     getForecastWeek("capricorn", URLHoroscopeWeekMonth)
@@ -323,7 +306,9 @@ class MainActivity : AppCompatActivity() {
                     editor.putString(APP_PREFERENCES_SELECTED_HOROSCOPE, "capricorn")
                     editor.apply()
                 }
-                if(selItem.equals("Водолей")){
+                if(selItem.equals("Водолей") && zodiac != "aquarius"){
+                    getStartText("aquarius", URLHoroscopeTodayTomorrow)
+                    switchColorsForBtnToday()
                     getForecastToday("aquarius", URLHoroscopeTodayTomorrow)
                     getForecastTomorrow("aquarius", URLHoroscopeTodayTomorrow)
                     getForecastWeek("aquarius", URLHoroscopeWeekMonth)
@@ -332,7 +317,9 @@ class MainActivity : AppCompatActivity() {
                     editor.putString(APP_PREFERENCES_SELECTED_HOROSCOPE, "aquarius")
                     editor.apply()
                 }
-                if(selItem.equals("Рыбы")){
+                if(selItem.equals("Рыбы") && zodiac != "pisces"){
+                    getStartText("pisces", URLHoroscopeTodayTomorrow)
+                    switchColorsForBtnToday()
                     getForecastToday("pisces", URLHoroscopeTodayTomorrow)
                     getForecastTomorrow("pisces", URLHoroscopeTodayTomorrow)
                     getForecastWeek("pisces", URLHoroscopeWeekMonth)
@@ -382,6 +369,7 @@ class MainActivity : AppCompatActivity() {
         selSpinner()
 
     }
+
     private fun switchColorsForBtnToday() {
         btnToday.setBackgroundResource(R.drawable.button)
         btnToday.setTextColor(Color.WHITE)

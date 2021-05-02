@@ -6,17 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".FeedBack">
 
+    <ImageView
+        android:id="@+id/btnMenu2"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_gravity="right"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:onClick="openMenu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_menu_black" />
+
     <TextView
         android:id="@+id/FBTextHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="48dp"
         android:fontFamily="@font/sfprodisplay_bold"
         android:text="Обратная связь"
         android:textColor="#000000"
         android:textSize="27sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -36,14 +47,16 @@
 
     <EditText
         android:id="@+id/editTextEmail"
-        android:layout_width="313dp"
-        android:layout_height="65dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
         android:background="@drawable/edit_text_email"
         android:ems="10"
         android:fontFamily="@font/sfprodisplay_regular"
         android:hint="Ваш e-mail"
         android:inputType="textEmailAddress"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/FBTextMain"
         app:layout_constraintHorizontal_bias="0.0"
@@ -52,15 +65,17 @@
 
     <EditText
         android:id="@+id/editTextQuestion"
-        android:layout_width="313dp"
-        android:layout_height="205dp"
-        android:layout_marginTop="32dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
         android:background="@drawable/edit_text_question"
         android:ems="10"
         android:fontFamily="@font/sfprodisplay_regular"
         android:gravity="start|top"
         android:hint="Ваш вопрос"
         android:inputType="textMultiLine"
+        android:paddingTop="20dp"
+        android:paddingBottom="200dp"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/editTextEmail"
         app:layout_constraintHorizontal_bias="0.0"
@@ -70,13 +85,18 @@
     <Button
         android:id="@+id/buttonSend"
         style="@android:style/Widget.Button"
-        android:layout_width="251dp"
-        android:layout_height="59dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:background="@drawable/button_feedback_1"
         android:fontFamily="@font/sfprodisplay_bold"
+        android:paddingLeft="64dp"
+        android:paddingTop="16dp"
+        android:paddingRight="64dp"
+        android:paddingBottom="16dp"
         android:text="Отправить"
         android:textColor="#888888"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/editTextQuestion"
         app:layout_constraintStart_toStartOf="@+id/editTextQuestion"
         app:layout_constraintTop_toBottomOf="@+id/editTextQuestion" />
