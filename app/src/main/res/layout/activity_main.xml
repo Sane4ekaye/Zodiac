@@ -7,6 +7,22 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateDrawable="@drawable/loader"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -115,12 +131,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
+                android:text=""
                 android:lineSpacingExtra="2dp"
                 android:fontFamily="@font/sfprodisplay_regular"
                 android:textColor="#000427"
                 android:textSize="14sp" />
 
             <LinearLayout
+                android:id="@+id/likeInfoLayout"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:layout_marginTop="20dp"
@@ -170,6 +188,7 @@
                 android:textSize="14sp" />
 
             <LinearLayout
+                android:id="@+id/downMenuLayout"
                 android:layout_width="match_parent"
                 android:layout_height="38dp"
                 android:layout_marginBottom="30dp"
@@ -182,9 +201,9 @@
                     android:layout_height="34dp"
                     android:layout_marginLeft="20dp"
                     android:layout_weight="1"
-                    android:onClick="watchToday"
                     android:background="@drawable/button"
                     android:fontFamily="@font/sfprodisplay_regular"
+                    android:onClick="watchToday"
                     android:text="Сегодня"
                     android:textColor="#FFFFFF" />
 
@@ -195,8 +214,8 @@
                     android:layout_height="34dp"
                     android:layout_weight="1"
                     android:background="@color/white_true"
-                    android:onClick="watchTommorow"
                     android:fontFamily="@font/sfprodisplay_regular"
+                    android:onClick="watchTommorow"
                     android:text="Завтра"
                     android:textColor="#1572DB"
                     android:textSize="14sp" />
@@ -207,9 +226,9 @@
                     android:layout_width="103dp"
                     android:layout_height="34dp"
                     android:layout_weight="1"
-                    android:onClick="watchWeek"
                     android:background="@color/white_true"
                     android:fontFamily="@font/sfprodisplay_regular"
+                    android:onClick="watchWeek"
                     android:text="Неделя"
                     android:textColor="#1572DB"
                     android:textSize="14sp" />
@@ -221,9 +240,9 @@
                     android:layout_height="34dp"
                     android:layout_marginRight="20dp"
                     android:layout_weight="1"
-                    android:onClick="watchMonth"
                     android:background="@color/white_true"
                     android:fontFamily="@font/sfprodisplay_regular"
+                    android:onClick="watchMonth"
                     android:text="Месяц"
                     android:textColor="#1572DB"
                     android:textSize="14sp" />
@@ -231,6 +250,7 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigationView"
         android:layout_width="wrap_content"
@@ -242,4 +262,5 @@
         app:itemTextColor="@color/white"
         app:itemIconTint="@color/white"
         android:background="@drawable/bgmenu"/>
+
 </androidx.drawerlayout.widget.DrawerLayout>

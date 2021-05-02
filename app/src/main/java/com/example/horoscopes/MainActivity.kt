@@ -1,15 +1,24 @@
 package com.example.horoscopes
 
+import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
+import android.opengl.Visibility
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.text.Html
+import android.util.Log
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewParent
+import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.*
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
@@ -47,6 +56,30 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        tvMain.visibility = View.INVISIBLE
+        likeInfoLayout.visibility = View.INVISIBLE
+        textView7.visibility = View.INVISIBLE
+        downMenuLayout.visibility = View.INVISIBLE
+
+        val animation = ObjectAnimator.ofFloat(progressBar, "rotation", 0.0f, 360f)
+        animation.duration = 1000
+        animation.repeatCount = 200
+        animation.interpolator = AccelerateDecelerateInterpolator()
+        animation.start()
+        val timer = object: CountDownTimer(1500, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+            }
+            override fun onFinish() {
+                progressBar.visibility = View.INVISIBLE
+                tvMain.visibility = View.VISIBLE
+                likeInfoLayout.visibility = View.VISIBLE
+                textView7.visibility = View.VISIBLE
+                downMenuLayout.visibility = View.VISIBLE
+            }
+        }
+        timer.start()
+
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         val drawerLayout: DrawerLayout = findViewById(R.id.drawerLayout)
         var navigationView: NavigationView = findViewById(R.id.navigationView)
@@ -65,8 +98,14 @@ class MainActivity : AppCompatActivity() {
         getForecastWeek(zodiac, URLHoroscopeWeekMonth)
 
         getForecastMonth(zodiac, URLHoroscopeWeekMonth)
-
-
+//
+//        if (animation.isPaused) {
+//            progressBar.visibility = View.INVISIBLE
+//            tvMain.visibility = View.VISIBLE
+//            likeInfoLayout.visibility = View.VISIBLE
+//            textView7.visibility = View.VISIBLE
+//            downMenuLayout.visibility = View.VISIBLE
+//        }
     }
 
     // это затычка
@@ -148,7 +187,7 @@ class MainActivity : AppCompatActivity() {
                 } else if (tag.equals("p")) {
                     resultText.append(text + "<br><br>")
                 } else if (tag.equals("h2")) {
-                    var textMonth = "<big><sup><b>$text</b></sup></big>"
+                    var textMonth = "<br><big><sup><b>$text</b></sup></big>"
                     resultText.append(textMonth + "<br>")
                 } else if (tag.equals("div")) {
                     text = textElements.select("div")[divCounter + 1].nextElementSibling().text()
