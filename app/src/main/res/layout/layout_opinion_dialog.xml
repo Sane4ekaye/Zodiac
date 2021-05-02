@@ -53,6 +53,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
+        android:numStars="5"
         android:theme="@style/ratingbar"
         app:layout_constraintEnd_toEndOf="@+id/dialogTextHeader2"
         app:layout_constraintStart_toStartOf="@+id/dialogTextHeader2"

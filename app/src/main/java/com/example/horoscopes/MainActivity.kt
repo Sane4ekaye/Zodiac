@@ -21,6 +21,7 @@ import android.view.ViewParent
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.*
 import android.widget.*
+import android.widget.RatingBar.OnRatingBarChangeListener
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -98,6 +99,10 @@ class MainActivity : AppCompatActivity() {
         getForecastWeek(zodiac, URLHoroscopeWeekMonth)
 
         getForecastMonth(zodiac, URLHoroscopeWeekMonth)
+                //////////////////////// УЕБАНСКАЯ СТРОЧКА СУКА ДРОЧИЛЬНЯ С НЕЙ ЕБЕЙШАЯ, ИДИТЕ НАХУЙ БЛЯТЬ
+        ratingBar.setOnRatingBarChangeListener { ratingBar, rating, fromUser ->  dialogTextHeader.text = rating.toString() }
+
+
 //
 //        if (animation.isPaused) {
 //            progressBar.visibility = View.INVISIBLE
@@ -527,6 +532,8 @@ class MainActivity : AppCompatActivity() {
         drawerLayout.closeDrawer(GravityCompat.START)
         openDialog()
 
+
+
 //        var builder: AlertDialog.Builder = AlertDialog.Builder(this@MainActivity)
 //        var viewGroup: ViewGroup = findViewById(android.R.id.content)
 //        var dialogView: View = LayoutInflater.from(view.context).inflate(R.layout.layout_opinion_dialog, viewGroup, false)
@@ -557,6 +564,5 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this@MainActivity, FeedBack::class.java)
         startActivity(intent)
     }
-
 
 }
