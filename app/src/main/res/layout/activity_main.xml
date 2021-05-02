@@ -111,6 +111,7 @@
                 android:id="@+id/tvMain"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:lineSpacingExtra="2dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:fontFamily="@font/sfprodisplay_regular"

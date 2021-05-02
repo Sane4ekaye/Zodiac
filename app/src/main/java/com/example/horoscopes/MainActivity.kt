@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
 import android.view.Gravity
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewParent
 import android.widget.*
@@ -17,6 +18,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_navigation_header.*
+import kotlinx.android.synthetic.main.layout_toast.*
 import org.jsoup.Jsoup
 import kotlin.concurrent.thread
 
@@ -31,10 +33,11 @@ class MainActivity : AppCompatActivity() {
     private var forecastWeek = ""
     private var forecastMonth = ""
 
+    var mToast: Toast? = null
+
     var Setting: SharedPreferences? = null
     val APP_PREFERENCES: String = "horoscope"
     val APP_PREFERENCES_SELECTED_HOROSCOPE: String = "selectedHoroscope"
-
     var zodiac = ""
 
     var horoscope: Array<String> = arrayOf("Овен", "Телец", "Близнецы", "Рак", "Лев", "Дева", "Весы", "Скорпион", "Стрелец", "Козерог", "Водолей", "Рыбы")
@@ -50,7 +53,7 @@ class MainActivity : AppCompatActivity() {
         Setting = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
 
         zodiac = Setting!!.getString(APP_PREFERENCES_SELECTED_HOROSCOPE, "").toString()
-        
+        mToast = Toast(applicationContext)
         getStartText(zodiac, URLHoroscopeTodayTomorrow)
 
         getForecastToday(zodiac, URLHoroscopeTodayTomorrow)
@@ -490,5 +493,15 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this@MainActivity, FeedBack::class.java)
         startActivity(intent)
     }
+
+    fun like(view: View) {
+        var inflater: LayoutInflater = layoutInflater
+        var customToastLayout: View = inflater.inflate(R.layout.layout_toast, findViewById(R.id.root_layout))
+
+        mToast!!.duration = Toast.LENGTH_LONG
+        mToast!!.view = customToastLayout
+        mToast!!.show()
+    }
+
 
 }

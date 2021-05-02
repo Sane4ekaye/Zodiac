@@ -7,7 +7,7 @@
     tools:context=".FeedBack">
 
     <TextView
-        android:id="@+id/textHeaderFeedBack"
+        android:id="@+id/FBTextHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textHeaderFeedBack2"
+        android:id="@+id/FBTextMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -29,53 +29,56 @@
         android:text="Напишите свой вопрос и мы ответим вам"
         android:textColor="#000000"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/textHeaderFeedBack"
+        app:layout_constraintEnd_toEndOf="@+id/FBTextHeader"
         app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="@+id/textHeaderFeedBack"
-        app:layout_constraintTop_toBottomOf="@+id/textHeaderFeedBack" />
+        app:layout_constraintStart_toStartOf="@+id/FBTextHeader"
+        app:layout_constraintTop_toBottomOf="@+id/FBTextHeader" />
 
     <EditText
-        android:id="@+id/editTextTextEmailAddress"
+        android:id="@+id/editTextEmail"
         android:layout_width="313dp"
         android:layout_height="65dp"
         android:layout_marginTop="36dp"
-        android:background="@drawable/edit_text"
+        android:background="@drawable/edit_text_email"
         android:ems="10"
+        android:fontFamily="@font/sfprodisplay_regular"
         android:hint="Ваш e-mail"
         android:inputType="textEmailAddress"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/textHeaderFeedBack2"
+        app:layout_constraintEnd_toEndOf="@+id/FBTextMain"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textHeaderFeedBack2"
-        app:layout_constraintTop_toBottomOf="@+id/textHeaderFeedBack2" />
+        app:layout_constraintStart_toStartOf="@+id/FBTextMain"
+        app:layout_constraintTop_toBottomOf="@+id/FBTextMain" />
 
     <EditText
-        android:id="@+id/editTextTextMultiLine2"
+        android:id="@+id/editTextQuestion"
         android:layout_width="313dp"
         android:layout_height="205dp"
         android:layout_marginTop="32dp"
-        android:background="@drawable/edit_text"
+        android:background="@drawable/edit_text_question"
         android:ems="10"
+        android:fontFamily="@font/sfprodisplay_regular"
         android:gravity="start|top"
         android:hint="Ваш вопрос"
         android:inputType="textMultiLine"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextEmailAddress"
+        app:layout_constraintEnd_toEndOf="@+id/editTextEmail"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextEmailAddress"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress" />
+        app:layout_constraintStart_toStartOf="@+id/editTextEmail"
+        app:layout_constraintTop_toBottomOf="@+id/editTextEmail" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/buttonSend"
         style="@android:style/Widget.Button"
-        android:layout_width="264dp"
-        android:layout_height="73dp"
-        android:layout_marginTop="64dp"
-        android:background="@drawable/button_feedback"
-        android:text="Button"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextMultiLine2"
-        app:layout_constraintHorizontal_bias="0.489"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextMultiLine2"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine2" />
+        android:layout_width="251dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/button_feedback_1"
+        android:fontFamily="@font/sfprodisplay_bold"
+        android:text="Отправить"
+        android:textColor="#888888"
+        app:layout_constraintEnd_toEndOf="@+id/editTextQuestion"
+        app:layout_constraintStart_toStartOf="@+id/editTextQuestion"
+        app:layout_constraintTop_toBottomOf="@+id/editTextQuestion" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
