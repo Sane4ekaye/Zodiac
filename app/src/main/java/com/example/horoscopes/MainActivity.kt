@@ -46,7 +46,6 @@ class MainActivity : AppCompatActivity() {
         val drawerLayout: DrawerLayout = findViewById(R.id.drawerLayout)
         var navigationView: NavigationView = findViewById(R.id.navigationView)
         navigationView.itemIconTintList = null
-        //spinner.adapter = ArrayAdapter<String>(this@MainActivity, R.layout.layout_color_spinner, R.array.horoscope)
 
         Setting = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
 
@@ -68,6 +67,7 @@ class MainActivity : AppCompatActivity() {
         thread {
             val doc = Jsoup.connect("$url?znak=$zodiac").get()
             val textElements = doc.select("div[itemprop=description]")
+            //val resultText = (doc.select("div[itemprop=description]")).select("p").text()  <---- В одну строку (хуй знает работает или нет, но ошибок не дает)
             val resultText = textElements.select("p").text()
             this@MainActivity.runOnUiThread(java.lang.Runnable {
                 tvMain.text = resultText
@@ -222,31 +222,163 @@ class MainActivity : AppCompatActivity() {
         tvMain.text = Html.fromHtml(forecastMonth)
     }
 
-    fun openMenu(view: View) {
-        drawerLayout.openDrawer(GravityCompat.START)
-        var arrayAdapter: ArrayAdapter<Any?> = ArrayAdapter<Any?>(this@MainActivity, R.layout.layout_color_spinner, horoscope)
-        arrayAdapter.setDropDownViewResource(R.layout.layout_color_spinner2)
-        spinnernegra.adapter = arrayAdapter
-
-        spinnernegra?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+    fun selSpinner(){
+        spinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                var selItem = spinnernegra.getItemAtPosition(position).toString()
-                if(selItem.equals("Дева"))
-                  //zodiac = "aries"
-//                getStartText("aries", URLHoroscope)
-                  getForecastToday("virgo", URLHoroscopeTodayTomorrow)
-//                getForecastTomorrow("aries", "tomorrow", URLHoroscope)
-//                if(selItem.equals("Телец"))
-//                    getStartText("taurus", URLHoroscope)
-//                getForecastToday("taurus", URLHoroscope)
-//                getForecastTomorrow("taurus", "tomorrow", URLHoroscope)
+                var selItem = spinner.getItemAtPosition(position).toString()
+
+                if(selItem.equals("Овен")) {
+                    getForecastToday("aries", URLHoroscopeTodayTomorrow)
+                    getForecastTomorrow("aries", URLHoroscopeTodayTomorrow)
+                    getForecastWeek("aries", URLHoroscopeWeekMonth)
+                    getForecastMonth("aries", URLHoroscopeWeekMonth)
+                    var editor: SharedPreferences.Editor = Setting!!.edit()
+                    editor.putString(APP_PREFERENCES_SELECTED_HOROSCOPE, "aries")
+                    editor.apply()
+                }
+                if(selItem.equals("Телец")){
+                    getForecastToday("taurus", URLHoroscopeTodayTomorrow)
+                    getForecastTomorrow("taurus", URLHoroscopeTodayTomorrow)
+                    getForecastWeek("taurus", URLHoroscopeWeekMonth)
+                    getForecastMonth("taurus", URLHoroscopeWeekMonth)
+                    var editor: SharedPreferences.Editor = Setting!!.edit()
+                    editor.putString(APP_PREFERENCES_SELECTED_HOROSCOPE, "taurus")
+                    editor.apply()
+                }
+                if(selItem.equals("Близнецы")){
+                    getForecastToday("gemini", URLHoroscopeTodayTomorrow)
+                    getForecastTomorrow("gemini", URLHoroscopeTodayTomorrow)
+                    getForecastWeek("gemini", URLHoroscopeWeekMonth)
+                    getForecastMonth("gemini", URLHoroscopeWeekMonth)
+                    var editor: SharedPreferences.Editor = Setting!!.edit()
+                    editor.putString(APP_PREFERENCES_SELECTED_HOROSCOPE, "gemini")
+                    editor.apply()
+                }
+                if(selItem.equals("Рак")){
+                    getForecastToday("cancer", URLHoroscopeTodayTomorrow)
+                    getForecastTomorrow("cancer", URLHoroscopeTodayTomorrow)
+                    getForecastWeek("cancer", URLHoroscopeWeekMonth)
+                    getForecastMonth("cancer", URLHoroscopeWeekMonth)
+                    var editor: SharedPreferences.Editor = Setting!!.edit()
+                    editor.putString(APP_PREFERENCES_SELECTED_HOROSCOPE, "cancer")
+                    editor.apply()
+                }
+                if(selItem.equals("Лев")){
+                    getForecastToday("leo", URLHoroscopeTodayTomorrow)
+                    getForecastTomorrow("leo", URLHoroscopeTodayTomorrow)
+                    getForecastWeek("leo", URLHoroscopeWeekMonth)
+                    getForecastMonth("leo", URLHoroscopeWeekMonth)
+                    var editor: SharedPreferences.Editor = Setting!!.edit()
+                    editor.putString(APP_PREFERENCES_SELECTED_HOROSCOPE, "leo")
+                    editor.apply()
+                }
+                if(selItem.equals("Дева")){
+                    getForecastToday("virgo", URLHoroscopeTodayTomorrow)
+                    getForecastTomorrow("virgo", URLHoroscopeTodayTomorrow)
+                    getForecastWeek("virgo", URLHoroscopeWeekMonth)
+                    getForecastMonth("virgo", URLHoroscopeWeekMonth)
+                    var editor: SharedPreferences.Editor = Setting!!.edit()
+                    editor.putString(APP_PREFERENCES_SELECTED_HOROSCOPE, "virgo")
+                    editor.apply()
+                }
+                if(selItem.equals("Весы")){
+                    getForecastToday("libra", URLHoroscopeTodayTomorrow)
+                    getForecastTomorrow("libra", URLHoroscopeTodayTomorrow)
+                    getForecastWeek("libra", URLHoroscopeWeekMonth)
+                    getForecastMonth("libra", URLHoroscopeWeekMonth)
+                    var editor: SharedPreferences.Editor = Setting!!.edit()
+                    editor.putString(APP_PREFERENCES_SELECTED_HOROSCOPE, "libra")
+                    editor.apply()
+                }
+                if(selItem.equals("Скорпион")){
+                    getForecastToday("scorpio", URLHoroscopeTodayTomorrow)
+                    getForecastTomorrow("scorpio", URLHoroscopeTodayTomorrow)
+                    getForecastWeek("scorpio", URLHoroscopeWeekMonth)
+                    getForecastMonth("scorpio", URLHoroscopeWeekMonth)
+                    var editor: SharedPreferences.Editor = Setting!!.edit()
+                    editor.putString(APP_PREFERENCES_SELECTED_HOROSCOPE, "scorpio")
+                    editor.apply()
+                }
+                if(selItem.equals("Стрелец")){
+                    getForecastToday("sagittarius", URLHoroscopeTodayTomorrow)
+                    getForecastTomorrow("sagittarius", URLHoroscopeTodayTomorrow)
+                    getForecastWeek("sagittarius", URLHoroscopeWeekMonth)
+                    getForecastMonth("sagittarius", URLHoroscopeWeekMonth)
+                    var editor: SharedPreferences.Editor = Setting!!.edit()
+                    editor.putString(APP_PREFERENCES_SELECTED_HOROSCOPE, "sagittarius")
+                    editor.apply()
+                }
+                if(selItem.equals("Козерог")){
+                    getForecastToday("capricorn", URLHoroscopeTodayTomorrow)
+                    getForecastTomorrow("capricorn", URLHoroscopeTodayTomorrow)
+                    getForecastWeek("capricorn", URLHoroscopeWeekMonth)
+                    getForecastMonth("capricorn", URLHoroscopeWeekMonth)
+                    var editor: SharedPreferences.Editor = Setting!!.edit()
+                    editor.putString(APP_PREFERENCES_SELECTED_HOROSCOPE, "capricorn")
+                    editor.apply()
+                }
+                if(selItem.equals("Водолей")){
+                    getForecastToday("aquarius", URLHoroscopeTodayTomorrow)
+                    getForecastTomorrow("aquarius", URLHoroscopeTodayTomorrow)
+                    getForecastWeek("aquarius", URLHoroscopeWeekMonth)
+                    getForecastMonth("aquarius", URLHoroscopeWeekMonth)
+                    var editor: SharedPreferences.Editor = Setting!!.edit()
+                    editor.putString(APP_PREFERENCES_SELECTED_HOROSCOPE, "aquarius")
+                    editor.apply()
+                }
+                if(selItem.equals("Рыбы")){
+                    getForecastToday("pisces", URLHoroscopeTodayTomorrow)
+                    getForecastTomorrow("pisces", URLHoroscopeTodayTomorrow)
+                    getForecastWeek("pisces", URLHoroscopeWeekMonth)
+                    getForecastMonth("pisces", URLHoroscopeWeekMonth)
+                    var editor: SharedPreferences.Editor = Setting!!.edit()
+                    editor.putString(APP_PREFERENCES_SELECTED_HOROSCOPE, "pisces")
+                    editor.apply()
+                }
             }
         }
     }
+    fun openMenu(view: View) {
+        Setting = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
+        zodiac = Setting!!.getString(APP_PREFERENCES_SELECTED_HOROSCOPE, "").toString()
 
+        drawerLayout.openDrawer(GravityCompat.START)
+        var arrayAdapter: ArrayAdapter<Any?> = ArrayAdapter<Any?>(this@MainActivity, R.layout.layout_color_spinner, horoscope)
+        arrayAdapter.setDropDownViewResource(R.layout.layout_color_spinner2)
+        spinner.adapter = arrayAdapter
+
+        if(zodiac == "aries")
+            spinner.setSelection(0)
+        else if(zodiac == "taurus")
+            spinner.setSelection(1)
+        else if(zodiac == "gemini")
+            spinner.setSelection(2)
+        else if(zodiac == "cancer")
+            spinner.setSelection(3)
+        else if(zodiac == "leo")
+            spinner.setSelection(4)
+        else if(zodiac == "virgo")
+            spinner.setSelection(5)
+        else if(zodiac == "libra")
+            spinner.setSelection(6)
+        else if(zodiac == "scorpio")
+            spinner.setSelection(7)
+        else if(zodiac == "sagittarius")
+            spinner.setSelection(8)
+        else if(zodiac == "capricorn")
+            spinner.setSelection(9)
+        else if(zodiac == "aquarius")
+            spinner.setSelection(10)
+        else if(zodiac == "pisces")
+            spinner.setSelection(11)
+        else Toast.makeText(this, "Произошла ошибка!", Toast.LENGTH_SHORT).show()
+
+        selSpinner()
+
+    }
     private fun switchColorsForBtnToday() {
         btnToday.setBackgroundResource(R.drawable.button)
         btnToday.setTextColor(Color.WHITE)
