@@ -1,23 +1,24 @@
 package com.example.horoscopes
 
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewParent
+import android.view.*
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_navigation_header.*
+import kotlinx.android.synthetic.main.layout_opinion_dialog.*
 import kotlinx.android.synthetic.main.layout_toast.*
 import org.jsoup.Jsoup
 import kotlin.concurrent.thread
@@ -34,7 +35,7 @@ class MainActivity : AppCompatActivity() {
     private var forecastMonth = ""
 
     var mToast: Toast? = null
-
+    var dialog: Dialog? = null
     var Setting: SharedPreferences? = null
     val APP_PREFERENCES: String = "horoscope"
     val APP_PREFERENCES_SELECTED_HOROSCOPE: String = "selectedHoroscope"
@@ -51,7 +52,7 @@ class MainActivity : AppCompatActivity() {
         var navigationView: NavigationView = findViewById(R.id.navigationView)
         navigationView.itemIconTintList = null
         //spinner.adapter = ArrayAdapter<String>(this@MainActivity, R.layout.layout_color_spinner, R.array.horoscope)
-
+        dialog= Dialog(this)
         Setting = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
 
         zodiac = Setting!!.getString(APP_PREFERENCES_SELECTED_HOROSCOPE, "").toString()
@@ -478,17 +479,44 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun feedback(view: View) {
+        drawerLayout.closeDrawer(GravityCompat.START)
         val intent = Intent(this@MainActivity, FeedBack::class.java)
         startActivity(intent)
     }
 
     fun like(view: View) {
-        var inflater: LayoutInflater = layoutInflater
-        var customToastLayout: View = inflater.inflate(R.layout.layout_toast, findViewById(R.id.root_layout))
+        drawerLayout.closeDrawer(GravityCompat.START)
+        openDialog()
 
-        mToast!!.duration = Toast.LENGTH_LONG
-        mToast!!.view = customToastLayout
-        mToast!!.show()
+//        var builder: AlertDialog.Builder = AlertDialog.Builder(this@MainActivity)
+//        var viewGroup: ViewGroup = findViewById(android.R.id.content)
+//        var dialogView: View = LayoutInflater.from(view.context).inflate(R.layout.layout_opinion_dialog, viewGroup, false)
+//        builder.setView(dialogView)
+//        var alertDialog: AlertDialog = builder.create()
+//        alertDialog.show()
+
+//        var inflater: LayoutInflater = layoutInflater
+//        var customToastLayout: View = inflater.inflate(R.layout.layout_toast, findViewById(R.id.root_layout))
+//
+//        mToast!!.duration = Toast.LENGTH_LONG
+//        mToast!!.view = customToastLayout
+//        mToast!!.show()
+    }
+
+    fun openDialog(){
+        dialog?.setContentView(R.layout.layout_opinion_dialog)
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(android.graphics.Color.TRANSPARENT))
+        dialog?.show()
+    }
+
+    fun close(view: View) {
+        dialog?.hide()
+    }
+
+    fun openOpinion(view: View) {
+        dialog?.hide()
+        val intent = Intent(this@MainActivity, FeedBack::class.java)
+        startActivity(intent)
     }
 
 

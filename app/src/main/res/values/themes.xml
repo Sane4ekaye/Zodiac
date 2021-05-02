@@ -22,4 +22,10 @@
     <style name="AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="ratingbar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">#898989</item>
+        <item name="colorControlActivated">#FBCF09</item>
+    </style>
+
 </resources>
