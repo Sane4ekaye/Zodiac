@@ -28,14 +28,14 @@ class FeedBack : AppCompatActivity() {
         setContentView(R.layout.activity_feed_back)
         mToast = Toast(applicationContext)
 
-        FDEditTextEmail.addTextChangedListener(object : TextWatcher {
+        FBEditTextEmail.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                if (FDEditTextEmail.text.isEmpty() || editTextQuestion.text.isEmpty()) {
-                    buttonSend.setBackgroundResource(R.drawable.button_feedback_1)
-                    buttonSend.setTextColor(getColor(R.color.feedback_button_false))
+                if (FBEditTextEmail.text.isEmpty() || FBeditTextQuestion.text.isEmpty()) {
+                    FBbuttonSend.setBackgroundResource(R.drawable.button_feedback_1)
+                    FBbuttonSend.setTextColor(getColor(R.color.feedback_button_false))
                 } else {
-                    buttonSend.setBackgroundResource(R.drawable.button_feedback_2)
-                    buttonSend.setTextColor(getColor(R.color.feedback_button_true))
+                    FBbuttonSend.setBackgroundResource(R.drawable.button_feedback_2)
+                    FBbuttonSend.setTextColor(getColor(R.color.feedback_button_true))
                 }
             }
 
@@ -45,14 +45,14 @@ class FeedBack : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             }
         })
-        editTextQuestion.addTextChangedListener(object : TextWatcher {
+        FBeditTextQuestion.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                if (FDEditTextEmail.text.isEmpty() || editTextQuestion.text.isEmpty()) {
-                    buttonSend.setBackgroundResource(R.drawable.button_feedback_1)
-                    buttonSend.setTextColor(getColor(R.color.feedback_button_false))
+                if (FBEditTextEmail.text.isEmpty() || FBeditTextQuestion.text.isEmpty()) {
+                    FBbuttonSend.setBackgroundResource(R.drawable.button_feedback_1)
+                    FBbuttonSend.setTextColor(getColor(R.color.feedback_button_false))
                 } else {
-                    buttonSend.setBackgroundResource(R.drawable.button_feedback_2)
-                    buttonSend.setTextColor(getColor(R.color.feedback_button_true))
+                    FBbuttonSend.setBackgroundResource(R.drawable.button_feedback_2)
+                    FBbuttonSend.setTextColor(getColor(R.color.feedback_button_true))
                 }
             }
 
@@ -62,8 +62,8 @@ class FeedBack : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             }
         })
-        buttonSend.setOnClickListener(){
-            if(!FDEditTextEmail.text.isEmpty() && !editTextQuestion.text.isEmpty()){
+        FBbuttonSend.setOnClickListener(){
+            if(!FBEditTextEmail.text.isEmpty() && !FBeditTextQuestion.text.isEmpty()){
                 var inflater: LayoutInflater = layoutInflater
                 var customToastLayout: View = inflater.inflate(R.layout.layout_toast, findViewById(R.id.root_layout))
 
