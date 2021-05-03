@@ -149,7 +149,7 @@
 
                 <TextView
                     android:id="@+id/textUsefulInfo"
-                    android:layout_width="150dp"
+                    android:layout_width="181dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_weight="1"
@@ -161,17 +161,19 @@
                 <ImageView
                     android:id="@+id/imageView5"
                     android:layout_width="1dp"
-                    android:layout_height="30dp"
+                    android:layout_height="36dp"
                     android:layout_weight="1"
+                    android:onClick="buttonLike"
                     app:srcCompat="@drawable/like_choose" />
 
                 <ImageView
                     android:id="@+id/imageView6"
                     android:layout_width="1dp"
-                    android:layout_height="30dp"
+                    android:layout_height="36dp"
 
                     android:layout_marginRight="20dp"
                     android:layout_weight="1"
+                    android:onClick="buttnoDislike"
                     app:srcCompat="@drawable/dislike_choose" />
 
             </LinearLayout>

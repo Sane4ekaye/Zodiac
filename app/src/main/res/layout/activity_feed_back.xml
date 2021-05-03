@@ -45,7 +45,7 @@
         app:layout_constraintTop_toBottomOf="@+id/FBTextHeader" />
 
     <EditText
-        android:id="@+id/editTextEmail"
+        android:id="@+id/FDEditTextEmail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
@@ -76,10 +76,10 @@
         android:paddingTop="20dp"
         android:paddingBottom="200dp"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/editTextEmail"
+        app:layout_constraintEnd_toEndOf="@+id/FDEditTextEmail"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextEmail"
-        app:layout_constraintTop_toBottomOf="@+id/editTextEmail" />
+        app:layout_constraintStart_toStartOf="@+id/FDEditTextEmail"
+        app:layout_constraintTop_toBottomOf="@+id/FDEditTextEmail" />
 
     <Button
         android:id="@+id/buttonSend"

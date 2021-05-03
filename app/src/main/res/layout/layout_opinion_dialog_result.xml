@@ -20,58 +20,58 @@
         app:srcCompat="@drawable/ic_baseline_close_24" />
 
     <TextView
-        android:id="@+id/dialogTextHeader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:fontFamily="@font/sfprodisplay_bold"
-        android:text="Нам важно ваше мнение!"
-        android:textColor="#FFFFFF"
-        android:textSize="19sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
         android:id="@+id/dialogTextHeader2"
-        android:layout_width="272dp"
-        android:layout_height="67dp"
-        android:layout_marginTop="10dp"
+        android:layout_width="270dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="12dp"
         android:fontFamily="@font/sfprodisplay_regular"
-        android:text="Оцените наше приложение, пожалуйста. Это не займет много времени. Если у вас есть пожелания или замечания, то также напишите нам об этом."
+        android:text="Уточните пожалуйста, что именно вам не понравилось, и мы постараемся в самые короткие сроки решить проблему."
         android:textAlignment="center"
         android:textColor="#F3EFEF"
         android:textSize="13.5sp"
         app:layout_constraintEnd_toEndOf="@+id/dialogTextHeader"
-        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="@+id/dialogTextHeader"
         app:layout_constraintTop_toBottomOf="@+id/dialogTextHeader" />
 
-    <RatingBar
-        android:id="@+id/ratingBar3"
+    <TextView
+        android:id="@+id/dialogTextHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="80dp"
+        android:fontFamily="@font/sfprodisplay_bold"
+        android:text="Нам очень жаль :("
+        android:textColor="#FFFFFF"
+        android:textSize="19sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RatingBar
+        android:id="@+id/ratingBar3"
+        style="?android:attr/ratingBarStyleSmall"
         android:theme="@style/ratingbar"
+        android:layout_width="80dp"
+        android:layout_height="19dp"
+        android:layout_marginBottom="12dp"
         android:onClick="getRating"
-        app:layout_constraintEnd_toEndOf="@+id/dialogTextHeader2"
-        app:layout_constraintStart_toStartOf="@+id/dialogTextHeader2"
-        app:layout_constraintTop_toBottomOf="@+id/dialogTextHeader2" />
+        app:layout_constraintBottom_toTopOf="@+id/dialogTextHeader"
+        app:layout_constraintEnd_toEndOf="@+id/dialogTextHeader"
+        app:layout_constraintStart_toStartOf="@+id/dialogTextHeader" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="44dp"
         android:alpha="80"
         android:onClick="openOpinion"
         android:text="@string/text_feedback"
         android:textColor="#FFFFFF"
         android:textSize="13.5sp"
-        app:layout_constraintEnd_toEndOf="@+id/ratingBar3"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="@+id/ratingBar3"
-        app:layout_constraintTop_toBottomOf="@+id/ratingBar3" />
+        app:layout_constraintEnd_toEndOf="@+id/dialogTextHeader2"
+        app:layout_constraintStart_toStartOf="@+id/dialogTextHeader2"
+        app:layout_constraintTop_toBottomOf="@+id/dialogTextHeader2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

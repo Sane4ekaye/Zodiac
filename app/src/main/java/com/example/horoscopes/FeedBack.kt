@@ -3,18 +3,14 @@ package com.example.horoscopes
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
-import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ArrayAdapter
-import android.widget.EditText
 import android.widget.Toast
 import androidx.core.view.GravityCompat
-import androidx.core.widget.addTextChangedListener
-import android.view.animation.AccelerateDecelerateInterpolator
 import kotlinx.android.synthetic.main.activity_feed_back.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_navigation_header.*
@@ -32,9 +28,9 @@ class FeedBack : AppCompatActivity() {
         setContentView(R.layout.activity_feed_back)
         mToast = Toast(applicationContext)
 
-        editTextEmail.addTextChangedListener(object : TextWatcher {
+        FDEditTextEmail.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                if (editTextEmail.text.isEmpty() || editTextQuestion.text.isEmpty()) {
+                if (FDEditTextEmail.text.isEmpty() || editTextQuestion.text.isEmpty()) {
                     buttonSend.setBackgroundResource(R.drawable.button_feedback_1)
                     buttonSend.setTextColor(getColor(R.color.feedback_button_false))
                 } else {
@@ -51,7 +47,7 @@ class FeedBack : AppCompatActivity() {
         })
         editTextQuestion.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                if (editTextEmail.text.isEmpty() || editTextQuestion.text.isEmpty()) {
+                if (FDEditTextEmail.text.isEmpty() || editTextQuestion.text.isEmpty()) {
                     buttonSend.setBackgroundResource(R.drawable.button_feedback_1)
                     buttonSend.setTextColor(getColor(R.color.feedback_button_false))
                 } else {
@@ -67,7 +63,7 @@ class FeedBack : AppCompatActivity() {
             }
         })
         buttonSend.setOnClickListener(){
-            if(!editTextEmail.text.isEmpty() && !editTextQuestion.text.isEmpty()){
+            if(!FDEditTextEmail.text.isEmpty() && !editTextQuestion.text.isEmpty()){
                 var inflater: LayoutInflater = layoutInflater
                 var customToastLayout: View = inflater.inflate(R.layout.layout_toast, findViewById(R.id.root_layout))
 
@@ -82,7 +78,7 @@ class FeedBack : AppCompatActivity() {
             zodiac = Setting!!.getString(APP_PREFERENCES_SELECTED_HOROSCOPE, "").toString()
 
             drawerLayout.openDrawer(GravityCompat.START)
-            var arrayAdapter: ArrayAdapter<Any?> = ArrayAdapter<Any?>(this@FeedBack, R.layout.layout_color_spinner, horoscope)
+            val arrayAdapter: ArrayAdapter<Any?> = ArrayAdapter<Any?>(this@FeedBack, R.layout.layout_color_spinner, horoscope)
             arrayAdapter.setDropDownViewResource(R.layout.layout_color_spinner2)
             spinner.adapter = arrayAdapter
 //
