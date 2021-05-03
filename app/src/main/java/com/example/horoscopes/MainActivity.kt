@@ -47,6 +47,7 @@ class MainActivity : AppCompatActivity() {
     var horoscope: Array<String> = arrayOf("Овен", "Телец", "Близнецы", "Рак", "Лев", "Дева", "Весы", "Скорпион", "Стрелец", "Козерог", "Водолей", "Рыбы")
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        //
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         tvMain.visibility = View.INVISIBLE
