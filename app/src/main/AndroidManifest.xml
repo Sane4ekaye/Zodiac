@@ -12,6 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-7318343307281487~8923050518"/>
         <activity android:name=".FeedBack" />
         <activity android:name=".MainActivity" />
         <activity android:name=".ChooseZodiac">

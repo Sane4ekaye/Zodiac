@@ -11,13 +11,18 @@ import android.net.ConnectivityManager
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.text.Html
+import android.util.Log
 import android.view.*
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import androidx.core.view.MotionEventCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.gms.ads.*
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_navigation_header.*
@@ -30,12 +35,15 @@ import kotlin.concurrent.thread
 
 
 class MainActivity : AppCompatActivity() {
-    val URLHoroscopeTodayTomorrow: String = "https://1001goroskop.ru"
-    val URLHoroscopeWeekMonth: String = "https://horoscopes.rambler.ru"
+
+    private val URLHoroscopeTodayTomorrow: String = "https://1001goroskop.ru"
+    private val URLHoroscopeWeekMonth: String = "https://horoscopes.rambler.ru"
+
     private var forecastToday = ""
     private var forecastTomorrow = ""
     private var forecastWeek = ""
     private var forecastMonth = ""
+
     var mToast: Toast? = null
     var dialog: Dialog? = null
     var dialog2: Dialog? = null
@@ -43,17 +51,24 @@ class MainActivity : AppCompatActivity() {
     var Setting: SharedPreferences? = null
     val APP_PREFERENCES: String = "horoscope"
     val APP_PREFERENCES_SELECTED_HOROSCOPE: String = "selectedHoroscope"
+
     var zodiac = ""
+
     var horoscope: Array<String> = arrayOf("Овен", "Телец", "Близнецы", "Рак", "Лев", "Дева", "Весы", "Скорпион", "Стрелец", "Козерог", "Водолей", "Рыбы")
 
+    // рекламааааааааааааааааааааааааааааа
+    private var mInterstitialAd: InterstitialAd? = null
+    private final var TAG = "reklama"
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        //
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         tvMain.visibility = View.INVISIBLE
         likeInfoLayout.visibility = View.INVISIBLE
         textView7.visibility = View.INVISIBLE
         downMenuLayout.visibility = View.INVISIBLE
+
         val animation = ObjectAnimator.ofFloat(progressBar, "rotation", 0.0f, 360f)
         animation.duration = 1000
         animation.repeatCount = 200
@@ -76,24 +91,33 @@ class MainActivity : AppCompatActivity() {
             }
         }
         timer.start()
+
         if (!isOnline()){
             Toast.makeText(applicationContext, "Нет соединения с интернетом!",Toast.LENGTH_SHORT).show()
             return
         }
+
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         val navigationView: NavigationView = findViewById(R.id.navigationView2)
         navigationView.itemIconTintList = null
+
         dialog= Dialog(this)
         dialog2= Dialog(this)
         dialog3= Dialog(this)
         Setting = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
+
         zodiac = Setting!!.getString(APP_PREFERENCES_SELECTED_HOROSCOPE, "").toString()
+
         mToast = Toast(applicationContext)
+
         getStartText(zodiac, URLHoroscopeTodayTomorrow)
+
         getForecastToday(zodiac, URLHoroscopeTodayTomorrow)
         getForecastTomorrow(zodiac, URLHoroscopeTodayTomorrow)
         getForecastWeek(zodiac, URLHoroscopeWeekMonth)
+
         getForecastMonth(zodiac, URLHoroscopeWeekMonth)
+
     }
 
     private fun isOnline() : Boolean {
@@ -195,24 +219,69 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun showAd() {
+//        MobileAds.initialize(this) {}
+//
+//        var adRequest = AdRequest.Builder().build()
+//
+//        // я включил вашу рекламу: ca-app-pub-3940256099942544/1033173712
+//        // но вы можете включить тестовую: ca-app-pub-7318343307281487/4358771934
+//        InterstitialAd.load(this,"ca-app-pub-7318343307281487/4358771934", adRequest, object : InterstitialAdLoadCallback() {
+//            override fun onAdFailedToLoad(adError: LoadAdError) {
+//                Log.i(TAG, adError?.message)
+//                mInterstitialAd = null
+//            }
+//
+//            override fun onAdLoaded(interstitialAd: InterstitialAd) {
+//                Log.i(TAG, "Ad was loaded.")
+//                mInterstitialAd = interstitialAd
+//            }
+//        })
+//
+//        mInterstitialAd?.fullScreenContentCallback = object: FullScreenContentCallback() {
+//            override fun onAdDismissedFullScreenContent() {
+//                Log.i(TAG, "Ad was dismissed.")
+//            }
+//
+//            override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
+//                Log.i(TAG, "Ad failed to show.")
+//            }
+//
+//            override fun onAdShowedFullScreenContent() {
+//                Log.i(TAG, "Ad showed fullscreen content.")
+//                mInterstitialAd = null
+//            }
+//        }
+//
+//        if (mInterstitialAd != null) {
+//            mInterstitialAd?.show(this)
+//        } else {
+//            Log.i(TAG, "The interstitial ad wasn't ready yet.")
+//        }
+    }
+
     fun watchToday(view: View) {
         switchColorsForBtnToday()
         tvMain.text = forecastToday
+        showAd()
     }
 
     fun watchTommorow(view: View) {
         switchColorsForBtnTommorow()
         tvMain.text = forecastTomorrow
+        showAd()
     }
 
     fun watchWeek(view: View) {
         switchColorsForBtnWeek()
         tvMain.text = forecastWeek
+        showAd()
     }
 
     fun watchMonth(view: View) {
         switchColorsForBtnMonth()
         tvMain.text = Html.fromHtml(forecastMonth)
+        showAd()
     }
 
     fun setText(name: String){
@@ -425,6 +494,7 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
     fun close(view: View) {
         dialog?.hide()
         dialog2?.hide()

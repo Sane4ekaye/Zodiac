@@ -43,8 +43,10 @@ class FeedBack : AppCompatActivity() {
                     FBbuttonSend.setTextColor(getColor(R.color.feedback_button_true))
                 }
             }
+
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
+
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             }
         })
@@ -58,15 +60,18 @@ class FeedBack : AppCompatActivity() {
                     FBbuttonSend.setTextColor(getColor(R.color.feedback_button_true))
                 }
             }
+
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
+
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             }
         })
         FBbuttonSend.setOnClickListener(){
-            if(FBEditTextEmail.text.isNotEmpty() && FBeditTextQuestion.text.isNotEmpty()){
-                val inflater: LayoutInflater = layoutInflater
-                val customToastLayout: View = inflater.inflate(R.layout.layout_toast, findViewById(R.id.root_layout))
+            if(!FBEditTextEmail.text.isEmpty() && !FBeditTextQuestion.text.isEmpty()){
+                var inflater: LayoutInflater = layoutInflater
+                var customToastLayout: View = inflater.inflate(R.layout.layout_toast, findViewById(R.id.root_layout))
+
                 mToast!!.duration = Toast.LENGTH_LONG
                 mToast!!.view = customToastLayout
                 mToast!!.show()
@@ -75,7 +80,7 @@ class FeedBack : AppCompatActivity() {
         }
     }
     fun feedbackMenu(view: View) {
-        drawerLayout.openDrawer(GravityCompat.START)
+        drawerlayout2.openDrawer(GravityCompat.START)
     }
 
 }
