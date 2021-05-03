@@ -100,7 +100,7 @@ class MainActivity : AppCompatActivity() {
 
         getForecastMonth(zodiac, URLHoroscopeWeekMonth)
                 //////////////////////// УЕБАНСКАЯ СТРОЧКА СУКА ДРОЧИЛЬНЯ С НЕЙ ЕБЕЙШАЯ, ИДИТЕ НАХУЙ БЛЯТЬ
-        ratingBar.setOnRatingBarChangeListener { ratingBar, rating, fromUser ->  dialogTextHeader.text = rating.toString() }
+                //
 
 
 //
@@ -553,6 +553,11 @@ class MainActivity : AppCompatActivity() {
         dialog?.setContentView(R.layout.layout_opinion_dialog)
         dialog?.window?.setBackgroundDrawable(ColorDrawable(android.graphics.Color.TRANSPARENT))
         dialog?.show()
+        var ase = dialog?.ratingBar?.rating
+
+        Toast.makeText(this@MainActivity, "$ase", Toast.LENGTH_SHORT).show()
+        dialog?.ratingBar?.setOnRatingBarChangeListener { _, rating, _ ->  dialog?.dialogTextHeader?.text = rating.toString() }
+
     }
 
     fun close(view: View) {
