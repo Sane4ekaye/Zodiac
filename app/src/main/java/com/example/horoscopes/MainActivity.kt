@@ -7,15 +7,17 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import androidx.appcompat.app.AppCompatActivity
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.text.Html
+import android.view.*
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
-import android.view.*
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import androidx.core.view.MotionEventCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
@@ -68,20 +70,28 @@ class MainActivity : AppCompatActivity() {
             override fun onTick(millisUntilFinished: Long) {
             }
             override fun onFinish() {
-                progressBar.visibility = View.INVISIBLE
-                tvMain.visibility = View.VISIBLE
-                likeInfoLayout.visibility = View.VISIBLE
-                textView7.visibility = View.VISIBLE
-                downMenuLayout.visibility = View.VISIBLE
+                if (!isOnline()) {
+                    progressBar.visibility = View.INVISIBLE
+                    return
+                } else {
+                    progressBar.visibility = View.INVISIBLE
+                    tvMain.visibility = View.VISIBLE
+                    likeInfoLayout.visibility = View.VISIBLE
+                    textView7.visibility = View.VISIBLE
+                    downMenuLayout.visibility = View.VISIBLE
+                }
             }
         }
         timer.start()
 
+        if (!isOnline()){
+            Toast.makeText(getApplicationContext(), "Нет соединения с интернетом!",Toast.LENGTH_SHORT).show()
+            return
+        }
+
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-        val drawerLayout: DrawerLayout = findViewById(R.id.drawerLayout)
         var navigationView: NavigationView = findViewById(R.id.navigationView)
         navigationView.itemIconTintList = null
-        //spinner.adapter = ArrayAdapter<String>(this@MainActivity, R.layout.layout_color_spinner, R.array.horoscope)
 
         dialog= Dialog(this)
         dialog2= Dialog(this)
@@ -91,6 +101,7 @@ class MainActivity : AppCompatActivity() {
         zodiac = Setting!!.getString(APP_PREFERENCES_SELECTED_HOROSCOPE, "").toString()
 
         mToast = Toast(applicationContext)
+
         getStartText(zodiac, URLHoroscopeTodayTomorrow)
 
         getForecastToday(zodiac, URLHoroscopeTodayTomorrow)
@@ -99,24 +110,23 @@ class MainActivity : AppCompatActivity() {
 
         getForecastMonth(zodiac, URLHoroscopeWeekMonth)
 
-
-//
-//        if (animation.isPaused) {
-//            progressBar.visibility = View.INVISIBLE
-//            tvMain.visibility = View.VISIBLE
-//            likeInfoLayout.visibility = View.VISIBLE
-//            textView7.visibility = View.VISIBLE
-//            downMenuLayout.visibility = View.VISIBLE
-//        }
     }
 
-    // это затычка
+    private fun isOnline() : Boolean {
+        var cs = Context.CONNECTIVITY_SERVICE
+        var cm: ConnectivityManager = getSystemService(cs) as ConnectivityManager
+        if (cm.activeNetwork == null) {
+            return false
+        } else {
+            return true
+        }
+    }
+
+    // это чтобы когда приложение запускалось появлялся прогноз на сегодня сразу
     private fun getStartText(zodiac: String, url: String) {
         thread {
             val doc = Jsoup.connect("$url?znak=$zodiac").get()
-            val textElements = doc.select("div[itemprop=description]")
-            //val resultText = (doc.select("div[itemprop=description]")).select("p").text()  <---- В одну строку (хуй знает работает или нет, но ошибок не дает)
-            val resultText = textElements.select("p").text()
+            val resultText = (doc.select("div[itemprop=description]")).select("p").text()
             this@MainActivity.runOnUiThread(java.lang.Runnable {
                 tvMain.text = resultText
             })
@@ -126,8 +136,7 @@ class MainActivity : AppCompatActivity() {
     private fun getForecastToday(zodiac: String, url: String) {
         thread {
             val doc = Jsoup.connect("$url?znak=$zodiac").get()
-            val textElements = doc.select("div[itemprop=description]")
-            val resultText = textElements.select("p").text()
+            val resultText = doc.select("div[itemprop=description]").select("p").text()
             this@MainActivity.runOnUiThread(java.lang.Runnable {
                 forecastToday = resultText
             })
@@ -137,8 +146,7 @@ class MainActivity : AppCompatActivity() {
     private fun getForecastTomorrow(zodiac: String, url: String) {
         thread {
             val doc = Jsoup.connect("$url?znak=$zodiac&kn=tomorrow").get()
-            val textElements = doc.select("div[itemprop=description]")
-            val resultText = textElements.select("p").text()
+            val resultText = doc.select("div[itemprop=description]").select("p").text()
             this@MainActivity.runOnUiThread(java.lang.Runnable {
                 forecastTomorrow = resultText
             })
@@ -152,8 +160,8 @@ class MainActivity : AppCompatActivity() {
             var length = textElements.select("p").size
             var resultText = StringBuilder()
             for (i in 1..length) {
-                resultText.append(textElements.select("p")[i-1].text() + "\n\n")
-                if (i == length) resultText.append(textElements.select("p")[i-1].text())
+                resultText.append(textElements.select("p")[i - 1].text() + "\n\n")
+                if (i == length) resultText.append(textElements.select("p")[i - 1].text())
             }
             this@MainActivity.runOnUiThread(java.lang.Runnable {
                 forecastWeek = resultText.toString()
@@ -163,14 +171,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun getForecastMonth(zodiac: String, url: String) {
         thread {
-        // TODO если ты захочешь убиться нахуй, то вот затoчка хуйня и залупа но решение
-        //  var negri = textElements.html()
-
             val doc = Jsoup.connect("$url/$zodiac/monthly/").get()
             val textElements = doc.select("div[itemprop=articleBody]")
 
             var divCounter = 0
-            var negri = textElements.select("div")[divCounter + 1].nextElementSibling().text()
 
             var lengthP = textElements.select("p").size
             var lengthH2 = textElements.select("h2").size
@@ -266,6 +270,17 @@ class MainActivity : AppCompatActivity() {
     fun openMenu(view: View) {
         Setting = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
         zodiac = Setting!!.getString(APP_PREFERENCES_SELECTED_HOROSCOPE, "").toString()
+
+        if (!isOnline()) {
+            btnUpdate.visibility = View.VISIBLE
+            spinner.visibility = View.INVISIBLE
+        }
+
+        btnUpdate.setOnClickListener {
+            val intent = Intent(this@MainActivity, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
 
         drawerLayout.openDrawer(GravityCompat.START)
         var arrayAdapter: ArrayAdapter<Any?> = ArrayAdapter<Any?>(this@MainActivity, R.layout.layout_color_spinner, horoscope)
@@ -445,11 +460,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun buttonLike(view: View) {
-        openDialog()
+        if (isOnline()) openDialog()
     }
 
     fun buttnoDislike(view: View) {
-        openDialog()
+        if (isOnline()) openDialog()
     }
 
 }
