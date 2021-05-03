@@ -17,7 +17,6 @@ import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
-import androidx.core.view.MotionEventCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
@@ -31,15 +30,12 @@ import kotlin.concurrent.thread
 
 
 class MainActivity : AppCompatActivity() {
-
-    private val URLHoroscopeTodayTomorrow: String = "https://1001goroskop.ru"
-    private val URLHoroscopeWeekMonth: String = "https://horoscopes.rambler.ru"
-
+    val URLHoroscopeTodayTomorrow: String = "https://1001goroskop.ru"
+    val URLHoroscopeWeekMonth: String = "https://horoscopes.rambler.ru"
     private var forecastToday = ""
     private var forecastTomorrow = ""
     private var forecastWeek = ""
     private var forecastMonth = ""
-
     var mToast: Toast? = null
     var dialog: Dialog? = null
     var dialog2: Dialog? = null
@@ -47,20 +43,16 @@ class MainActivity : AppCompatActivity() {
     var Setting: SharedPreferences? = null
     val APP_PREFERENCES: String = "horoscope"
     val APP_PREFERENCES_SELECTED_HOROSCOPE: String = "selectedHoroscope"
-
     var zodiac = ""
-
     var horoscope: Array<String> = arrayOf("Овен", "Телец", "Близнецы", "Рак", "Лев", "Дева", "Весы", "Скорпион", "Стрелец", "Козерог", "Водолей", "Рыбы")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         tvMain.visibility = View.INVISIBLE
         likeInfoLayout.visibility = View.INVISIBLE
         textView7.visibility = View.INVISIBLE
         downMenuLayout.visibility = View.INVISIBLE
-
         val animation = ObjectAnimator.ofFloat(progressBar, "rotation", 0.0f, 360f)
         animation.duration = 1000
         animation.repeatCount = 200
@@ -83,38 +75,29 @@ class MainActivity : AppCompatActivity() {
             }
         }
         timer.start()
-
         if (!isOnline()){
-            Toast.makeText(getApplicationContext(), "Нет соединения с интернетом!",Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "Нет соединения с интернетом!",Toast.LENGTH_SHORT).show()
             return
         }
-
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-        var navigationView: NavigationView = findViewById(R.id.navigationView)
+        val navigationView: NavigationView = findViewById(R.id.navigationView2)
         navigationView.itemIconTintList = null
-
         dialog= Dialog(this)
         dialog2= Dialog(this)
         dialog3= Dialog(this)
         Setting = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
-
         zodiac = Setting!!.getString(APP_PREFERENCES_SELECTED_HOROSCOPE, "").toString()
-
         mToast = Toast(applicationContext)
-
         getStartText(zodiac, URLHoroscopeTodayTomorrow)
-
         getForecastToday(zodiac, URLHoroscopeTodayTomorrow)
         getForecastTomorrow(zodiac, URLHoroscopeTodayTomorrow)
         getForecastWeek(zodiac, URLHoroscopeWeekMonth)
-
         getForecastMonth(zodiac, URLHoroscopeWeekMonth)
-
     }
 
     private fun isOnline() : Boolean {
-        var cs = Context.CONNECTIVITY_SERVICE
-        var cm: ConnectivityManager = getSystemService(cs) as ConnectivityManager
+        val cs = Context.CONNECTIVITY_SERVICE
+        val cm: ConnectivityManager = getSystemService(cs) as ConnectivityManager
         if (cm.activeNetwork == null) {
             return false
         } else {
@@ -173,9 +156,7 @@ class MainActivity : AppCompatActivity() {
         thread {
             val doc = Jsoup.connect("$url/$zodiac/monthly/").get()
             val textElements = doc.select("div[itemprop=articleBody]")
-
             var divCounter = 0
-
             var lengthP = textElements.select("p").size
             var lengthH2 = textElements.select("h2").size
             var length = lengthP + lengthH2 + 1
@@ -207,7 +188,6 @@ class MainActivity : AppCompatActivity() {
                     tag = doc.selectFirst("$tag:containsOwn($tempText)").nextElementSibling().tagName()
                 }
               }
-
             this@MainActivity.runOnUiThread(java.lang.Runnable {
                 forecastMonth = resultText.toString()
             })
@@ -444,7 +424,6 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-
     fun close(view: View) {
         dialog?.hide()
         dialog2?.hide()
