@@ -156,4 +156,20 @@
             app:layout_constraintTop_toTopOf="@+id/imageView10" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <Button
+        android:id="@+id/button"
+        style="@android:style/Widget.Button"
+        android:layout_width="126dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="316dp"
+        android:background="@drawable/button_feedback_1"
+        android:fontFamily="@font/sfprodisplay_bold"
+        android:text="Обновить"
+        android:textColor="#989898"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnLike" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
