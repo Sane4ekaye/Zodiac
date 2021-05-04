@@ -1,4 +1,4 @@
-package com.example.horoscopes
+package com.nomercheck.horoscope1
 
 import org.junit.Test
 

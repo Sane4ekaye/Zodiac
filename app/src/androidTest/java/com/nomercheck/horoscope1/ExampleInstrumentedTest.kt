@@ -1,4 +1,4 @@
-package com.example.horoscopes
+package com.nomercheck.horoscope1
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

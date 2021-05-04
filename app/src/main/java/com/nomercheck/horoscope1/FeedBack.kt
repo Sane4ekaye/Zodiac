@@ -1,26 +1,16 @@
-package com.example.horoscopes
+package com.nomercheck.horoscope1
 
-import android.content.Context
-import android.content.Intent
-import android.content.SharedPreferences
-import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_feed_back.*
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.layout_navigation_header.*
-import org.jsoup.Jsoup
-import kotlin.concurrent.thread
 
 
 class FeedBack : AppCompatActivity() {

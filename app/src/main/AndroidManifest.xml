@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.horoscopes">
+    package="com.nomercheck.horoscope1">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -15,9 +15,9 @@
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-7318343307281487~8923050518"/>
-        <activity android:name=".FeedBack" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".ChooseZodiac">
+        <activity android:name="com.nomercheck.horoscope1.FeedBack" />
+        <activity android:name="com.nomercheck.horoscope1.MainActivity" />
+        <activity android:name="com.nomercheck.horoscope1.ChooseZodiac">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

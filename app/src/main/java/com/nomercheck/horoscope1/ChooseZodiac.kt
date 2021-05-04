@@ -1,13 +1,10 @@
-package com.example.horoscopes
+package com.nomercheck.horoscope1
 
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_choose_zodiac.*
 
 class ChooseZodiac : AppCompatActivity() {

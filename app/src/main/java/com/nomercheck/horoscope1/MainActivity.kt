@@ -1,4 +1,4 @@
-package com.example.horoscopes
+package com.nomercheck.horoscope1
 
 import android.animation.ObjectAnimator
 import android.app.Dialog
@@ -11,18 +11,15 @@ import android.net.ConnectivityManager
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.text.Html
-import android.util.Log
 import android.view.*
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
-import androidx.core.view.MotionEventCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.gms.ads.*
 import com.google.android.gms.ads.interstitial.InterstitialAd
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_navigation_header.*
