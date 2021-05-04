@@ -11,6 +11,7 @@ import android.net.ConnectivityManager
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.text.Html
+import android.util.Log
 import android.view.*
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
@@ -20,6 +21,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.gms.ads.*
 import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_navigation_header.*
@@ -217,44 +219,44 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun showAd() {
-//        MobileAds.initialize(this) {}
-//
-//        var adRequest = AdRequest.Builder().build()
-//
-//        // я включил вашу рекламу: ca-app-pub-3940256099942544/1033173712
-//        // но вы можете включить тестовую: ca-app-pub-7318343307281487/4358771934
-//        InterstitialAd.load(this,"ca-app-pub-7318343307281487/4358771934", adRequest, object : InterstitialAdLoadCallback() {
-//            override fun onAdFailedToLoad(adError: LoadAdError) {
-//                Log.i(TAG, adError?.message)
-//                mInterstitialAd = null
-//            }
-//
-//            override fun onAdLoaded(interstitialAd: InterstitialAd) {
-//                Log.i(TAG, "Ad was loaded.")
-//                mInterstitialAd = interstitialAd
-//            }
-//        })
-//
-//        mInterstitialAd?.fullScreenContentCallback = object: FullScreenContentCallback() {
-//            override fun onAdDismissedFullScreenContent() {
-//                Log.i(TAG, "Ad was dismissed.")
-//            }
-//
-//            override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
-//                Log.i(TAG, "Ad failed to show.")
-//            }
-//
-//            override fun onAdShowedFullScreenContent() {
-//                Log.i(TAG, "Ad showed fullscreen content.")
-//                mInterstitialAd = null
-//            }
-//        }
-//
-//        if (mInterstitialAd != null) {
-//            mInterstitialAd?.show(this)
-//        } else {
-//            Log.i(TAG, "The interstitial ad wasn't ready yet.")
-//        }
+        MobileAds.initialize(this) {}
+
+        var adRequest = AdRequest.Builder().build()
+
+        // я включил вашу рекламу: ca-app-pub-7318343307281487/4358771934
+        // но вы можете включить тестовую: ca-app-pub-3940256099942544/1033173712
+        InterstitialAd.load(this,"ca-app-pub-7318343307281487/4358771934", adRequest, object : InterstitialAdLoadCallback() {
+            override fun onAdFailedToLoad(adError: LoadAdError) {
+                Log.i(TAG, adError?.message)
+                mInterstitialAd = null
+            }
+
+            override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                Log.i(TAG, "Ad was loaded.")
+                mInterstitialAd = interstitialAd
+            }
+        })
+
+        mInterstitialAd?.fullScreenContentCallback = object: FullScreenContentCallback() {
+            override fun onAdDismissedFullScreenContent() {
+                Log.i(TAG, "Ad was dismissed.")
+            }
+
+            override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
+                Log.i(TAG, "Ad failed to show.")
+            }
+
+            override fun onAdShowedFullScreenContent() {
+                Log.i(TAG, "Ad showed fullscreen content.")
+                mInterstitialAd = null
+            }
+        }
+
+        if (mInterstitialAd != null) {
+            mInterstitialAd?.show(this)
+        } else {
+            Log.i(TAG, "The interstitial ad wasn't ready yet.")
+        }
     }
 
     fun watchToday(view: View) {
